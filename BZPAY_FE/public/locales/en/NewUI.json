@@ -1,0 +1,11 @@
+{
+  "welcome": "Hi.Welcome to the NewUI {{ username }} you have been successfully logged in and you are on the home page",
+  "user": "User",
+  "password": "Password",
+  "login": "Login",
+  "actual_language": "Actual Language",
+  "close_session": "Close Session",
+  "spanish": "Spanish",
+  "english": "English",
+  "started_session": "Started Session"
+}

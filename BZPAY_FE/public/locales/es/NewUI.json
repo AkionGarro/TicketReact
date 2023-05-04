@@ -1,0 +1,11 @@
+{
+  "welcome": "Hola. Bienvenido al NuevoUI {{ username }} usted ha sido exitosamente logueado y se encuentra en la página de home",
+  "user": "Usuario",
+  "password": "Clave",
+  "login": "Iniciar Sesion",
+  "actual_language": "Lenguaje Actual",
+  "close_session": "Cerrar Sesión",
+  "spanish": "Español",
+  "english": "Inglés",
+  "started_session": "Sesión Iniciada"
+}
