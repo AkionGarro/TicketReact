@@ -13,8 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add DbContext
-var connectionString = builder.Configuration.GetConnectionString("MembershipContext");
-builder.Services.AddDbContext<MembershipContext>(x => x.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<project_ticketContext>(x => 
+x.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.27-mariadb")));
 
 // Add services
 builder.Services.AddScoped<IAspnetUserService, AspnetUserService>();

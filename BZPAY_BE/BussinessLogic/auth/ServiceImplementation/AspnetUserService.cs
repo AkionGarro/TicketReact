@@ -34,7 +34,7 @@ namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
         }
 
         public async Task<AspnetUserDo?> StartSessionAsync(LoginRequest login)
-        {
+        {/*
             var user = await _aspnetUserRepository.GetUserByUserNameAsync(login.Username);
             if (user == null) return null;
             var encrypt = SecurityHelper.EncodePassword(login.Password, 1, user.AspnetMembership.PasswordSalt);
@@ -42,7 +42,8 @@ namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
                 return null;
             var userDo = _mapper.Map<AspnetUserDo>(user); 
             userDo.Membership = _mapper.Map<AspnetMembershipDo>(user.AspnetMembership);
-            return userDo;
+            return userDo;*/
+            return null;
         }
 
         public async Task<AspnetUserDo?> ForgotPasswordAsync(string username)
@@ -56,7 +57,7 @@ namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
             var user = await _aspnetUserRepository.GetUserByUserNameAsync(username);
             if (user == null) return null;
             var userDo = _mapper.Map<AspnetUserDo>(user);
-            userDo.Membership = _mapper.Map<AspnetMembershipDo>(user.AspnetMembership);
+            //userDo.Membership = _mapper.Map<AspnetMembershipDo>(user.AspnetMembership);
             var response = new ForgotPasswordResponse { UserId = userDo.UserId.ToString(), UserName = userDo.UserName, Hour = DateTime.Now };
             var link = _config["Hosts:FrontEndURL"] + "/RecoverPassword?token=" + SecurityHelper.Encript(JsonSerializer.Serialize(response));
             var subject = _localizer["Subject"];
@@ -82,11 +83,11 @@ namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
             if (!match.Success) throw new Exception(_localizer["InvalidPassword"]);
             var minutes = (Clock.Now - data.Hour).TotalMinutes;
             if (minutes > 30) throw new Exception(_localizer["ExpiredLink"]);
-            user.AspnetMembership.Password = SecurityHelper.EncodePassword(password, 1, user.AspnetMembership.PasswordSalt);
-            user.AspnetMembership.LastPasswordChangedDate = Clock.Now;   
+            //user.AspnetMembership.Password = SecurityHelper.EncodePassword(password, 1, user.AspnetMembership.PasswordSalt);
+            //user.AspnetMembership.LastPasswordChangedDate = Clock.Now;   
             var result = await _aspnetUserRepository.UpdateAsync(user);
             var userDo = _mapper.Map<AspnetUserDo>(result);
-            userDo.Membership = _mapper.Map<AspnetMembershipDo>(result.AspnetMembership);
+            //userDo.Membership = _mapper.Map<AspnetMembershipDo>(result.AspnetMembership);
             return userDo;
         }
     }

@@ -15,22 +15,22 @@ namespace BZPAY_BE.Common.Profiles
 		/// </summary>
 		public AspnetUserProfile()
 		{
-            AspnetUserMapper(CreateMap<AspnetUser, AspnetUserDo>());
+            AspnetUserMapper(CreateMap<Aspnetuser, AspnetUserDo>());
 		}
 
         /// <summary>
         /// Mapped AspnetUser to AspnetUserDo
         /// </summary>
         /// <param name="mappingExpression"></param>
-        private void AspnetUserMapper(IMappingExpression<AspnetUser, AspnetUserDo> mappingExpression)
+        private void AspnetUserMapper(IMappingExpression<Aspnetuser, AspnetUserDo> mappingExpression)
         {
-            mappingExpression.ForMember(dest => dest.ApplicationId, act => act.MapFrom(src => src.ApplicationId))
+            /*mappingExpression.ForMember(dest => dest.ApplicationId, act => act.MapFrom(src => src.ApplicationId))
                              .ForMember(dest => dest.UserId, act => act.MapFrom(src => src.UserId))
                              .ForMember(dest => dest.UserName, act => act.MapFrom(src => src.UserName))
                              .ForMember(dest => dest.LoweredUserName, act => act.MapFrom(src => src.LoweredUserName))
                              .ForMember(dest => dest.MobileAlias, opt => opt.MapFrom(src => src.MobileAlias))
                              .ForMember(dest => dest.IsAnonymous, act => act.MapFrom(src => src.IsAnonymous))
-                             .ForMember(dest => dest.LastActivityDate, opt => opt.MapFrom(src => src.LastActivityDate));
+                             .ForMember(dest => dest.LastActivityDate, opt => opt.MapFrom(src => src.LastActivityDate));*/
         }
 
     }

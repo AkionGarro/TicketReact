@@ -8,7 +8,7 @@ namespace BZPAY_BE.Repositories.Implementations
     /// <summary>
     /// Repository for AspnetMembership
     /// </summary>
-    public class AspnetUserRepository : GenericRepository<AspnetUser>, IAspnetUserRepository
+    public class AspnetUserRepository : GenericRepository<Aspnetuser>, IAspnetUserRepository
     {
         /// <summary>
         /// Constructor of AspnetUserRepository
@@ -17,13 +17,13 @@ namespace BZPAY_BE.Repositories.Implementations
         public AspnetUserRepository(MembershipContext membershipContext) : base(membershipContext)
         {
         }       
-
-        public async Task<AspnetUser?> GetUserByUserNameAsync(string username)
+        
+        public async Task<Aspnetuser?> GetUserByUserNameAsync(string username)
         {
-            AspnetUser user = await _context.AspnetUsers
+           /*Aspnetuser user = await _context.AspnetUsers
                 .Include(x => x.AspnetMembership)
-                .SingleOrDefaultAsync(x => x.UserName == username);
-            return user;
+                .SingleOrDefaultAsync(x => x.UserName == username);*/
+            return null;
         }
     }
 }

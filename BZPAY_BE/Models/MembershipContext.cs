@@ -18,7 +18,7 @@ namespace BZPAY_BE.Models
 
         public virtual DbSet<AspnetApplication> AspnetApplications { get; set; } = null!;
         public virtual DbSet<AspnetMembership> AspnetMemberships { get; set; } = null!;
-        public virtual DbSet<AspnetUser> AspnetUsers { get; set; } = null!;
+        public virtual DbSet<Aspnetuser> AspnetUsers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -61,7 +61,7 @@ namespace BZPAY_BE.Models
 
                 entity.Property(e => e.LoweredApplicationName).HasMaxLength(256);
             });
-
+            /*
             modelBuilder.Entity<AspnetMembership>(entity =>
             {
                 entity.HasKey(e => e.UserId)
@@ -116,9 +116,9 @@ namespace BZPAY_BE.Models
                     .HasForeignKey<AspnetMembership>(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__aspnet_Me__UserI__7D439ABD");
-            });
-
-            modelBuilder.Entity<AspnetUser>(entity =>
+            });*/
+            /*
+            modelBuilder.Entity<Aspnetuser>(entity =>
             {
                 entity.HasKey(e => e.UserId)
                     .HasName("PK__aspnet_U__1788CC4D1F46F085")
@@ -148,7 +148,7 @@ namespace BZPAY_BE.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__aspnet_Us__Appli__03F0984C");
             });
-
+            */
             OnModelCreatingPartial(modelBuilder);
         }
 

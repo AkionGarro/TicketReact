@@ -27,6 +27,6 @@ namespace BZPAY_BE.Models
         public DateTime FailedPasswordAnswerAttemptWindowStart { get; set; }
         public string? Comment { get; set; }
         public virtual AspnetApplication Application { get; set; } = null!;
-        public virtual AspnetUser User { get; set; } = null!;
+        public virtual Aspnetuser User { get; set; } = null!;
     }
 }
