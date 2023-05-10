@@ -14,16 +14,16 @@ namespace BZPAY_BE.Repositories.Implementations
         /// Constructor of AspnetUserRepository
         /// </summary>
         /// <param name="membershipContext"></param>
-        public AspnetUserRepository(MembershipContext membershipContext) : base(membershipContext)
+        public AspnetUserRepository(project_ticketContext projecticketContext) : base(projecticketContext)
         {
         }       
         
         public async Task<Aspnetuser?> GetUserByUserNameAsync(string username)
         {
-           /*Aspnetuser user = await _context.AspnetUsers
-                .Include(x => x.AspnetMembership)
-                .SingleOrDefaultAsync(x => x.UserName == username);*/
-            return null;
+           Aspnetuser user = await _context.Aspnetusers
+                .Include(x => x.UserName== username)
+                .SingleOrDefaultAsync();
+            return user;
         }
     }
 }

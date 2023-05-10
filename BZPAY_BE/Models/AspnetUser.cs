@@ -13,6 +13,8 @@ namespace BZPAY_BE.Models
             Roles = new HashSet<Aspnetrole>();
         }
 
+        
+   
         public string Id { get; set; } = null!;
         public string Discriminator { get; set; } = null!;
         public string? UserName { get; set; }
@@ -35,5 +37,10 @@ namespace BZPAY_BE.Models
         public virtual ICollection<Aspnetusertoken> Aspnetusertokens { get; set; }
 
         public virtual ICollection<Aspnetrole> Roles { get; set; }
+
+        public static implicit operator Aspnetuser?(Aspnetuserlogin? v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

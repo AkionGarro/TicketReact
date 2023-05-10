@@ -7,6 +7,8 @@ namespace BZPAY_BE.Models
 {
     public partial class project_ticketContext : DbContext
     {
+        internal readonly Task<Aspnetuser> Aspnetuserlogin;
+
         public project_ticketContext()
         {
         }

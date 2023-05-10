@@ -10,12 +10,12 @@ namespace BZPAY_UI.Repositories.Implementations
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected readonly MembershipContext _context;
+        protected readonly project_ticketContext _context;
 
         /// <summary>
         /// Contructor of GenericRepository
         /// </summary>
-        public GenericRepository(MembershipContext context)
+        public GenericRepository(project_ticketContext context)
         {
             _context = context;
         }
