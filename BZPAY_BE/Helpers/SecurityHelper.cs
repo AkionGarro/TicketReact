@@ -1,4 +1,7 @@
-﻿using System.Security.Cryptography;
+﻿using BZPAY_BE.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BZPAY_BE.Helpers
@@ -44,5 +47,11 @@ namespace BZPAY_BE.Helpers
             }
             return Convert.ToBase64String(inArray);
         }
+
+
+
+
+
+
     }
 }

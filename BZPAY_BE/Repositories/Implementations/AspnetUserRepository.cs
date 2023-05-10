@@ -21,8 +21,8 @@ namespace BZPAY_BE.Repositories.Implementations
         public async Task<Aspnetuser?> GetUserByUserNameAsync(string username)
         {
            Aspnetuser user = await _context.Aspnetusers
-                .Include(x => x.UserName== username)
-                .SingleOrDefaultAsync();
+                .Include(x=> x.Aspnetuserlogins)
+                .SingleOrDefaultAsync(x=> x.UserName == username);
             return user;
         }
     }

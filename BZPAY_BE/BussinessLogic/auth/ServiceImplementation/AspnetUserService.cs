@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using BZPAY_BE.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
 {
@@ -33,10 +34,21 @@ namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
         {
             var user = await _aspnetUserRepository.GetUserByUserNameAsync(login.Username);
             if (user == null) return null;
-            var encrypt = SecurityHelper.EncodePassword(login.Password, 1, user.PasswordHash);
-            if (encrypt != user.PasswordHash)
+         
+
+            var passwordHasher = new PasswordHasher<Aspnetuser>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, login.Password);
+            if (result == PasswordVerificationResult.Success)
+            {
+                Console.WriteLine("Successfull");
+                return user;
+            }
+            else
+            {
+                Console.WriteLine("Mamar verga");
                 return null;
-            return user;
+            }
+            
       
         }
 
