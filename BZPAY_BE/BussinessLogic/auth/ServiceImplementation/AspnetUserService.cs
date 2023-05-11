@@ -45,7 +45,7 @@ namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
             }
             else
             {
-                Console.WriteLine("Mamar verga");
+                Console.WriteLine("Error");
                 return null;
             }
             
