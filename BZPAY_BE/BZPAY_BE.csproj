@@ -67,6 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="BussinessLogic\Services\" />
     <Folder Include="DataAccess\" />
     <Folder Include="Models\" />
   </ItemGroup>
