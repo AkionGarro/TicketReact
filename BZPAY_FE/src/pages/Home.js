@@ -20,9 +20,7 @@ function Home() {
     i18n.changeLanguage("es");
   }
 
-  lang.addEventListener("change", function () {
-    const selectedValue = lang.value;
-
+  /*  lang.addEventListener("change", function () {
     if (selectedValue === "1") {
       changeToSpanish();
     }
@@ -31,6 +29,21 @@ function Home() {
     } else {
       console.log("No se ha seleccionado idioma");
     }
+  });
+*/
+  lang.addEventListener("click", () => {
+    // if default value is changed
+    lang.addEventListener("change", () => {
+      const selectedValue = lang.value;
+      if (selectedValue === "1") {
+        changeToSpanish();
+      }
+      if (selectedValue === "2") {
+        changeToEnglish();
+      } else {
+        console.log("No se ha seleccionado idioma");
+      }
+    });
   });
 
   const cerrarSesion = () => {
