@@ -1,10 +1,12 @@
 using AutoMapper;
 using BZPAY_BE.BussinessLogic.auth.ServiceImplementation;
 using BZPAY_BE.BussinessLogic.auth.ServiceInterface;
-
+using BZPAY_BE.BussinessLogic.Services.Implementations;
+using BZPAY_BE.BussinessLogic.Services.Interfaces;
 using BZPAY_BE.Models;
 using BZPAY_BE.Repositories.Implementations;
 using BZPAY_BE.Repositories.Interfaces;
+using BZPAY_UI.Repositories.Implementations;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +21,17 @@ x.UseMySql(connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("
 
 // Add services
 builder.Services.AddScoped<IAspnetUserService, AspnetUserService>();
+builder.Services.AddScoped<ITipoEventoService, TipoEventoService>();
+builder.Services.AddScoped<IEventoService, EventoService>();
+builder.Services.AddScoped<IEscenarioService, EscenarioService>();
+builder.Services.AddScoped<IEntradaService, EntradaService>();
 
 // Add repositories
 builder.Services.AddScoped<IAspnetUserRepository, AspnetUserRepository>();
-
-
+builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
+builder.Services.AddScoped<IEventoRepository, EventoRepository>();
+builder.Services.AddScoped<IEscenarioRepository, EscenarioRepository>();
+builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();
 
 // Add services to the container.
 builder.Services.AddControllers();

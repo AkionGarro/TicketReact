@@ -12,7 +12,9 @@ using project_web.Models;
 
 namespace BZPAY_BE.Controllers
 {
-    public class EventoController : Controller
+    [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class EventoController : ControllerBase
     {
         private readonly IEventoService _eventoService;
         private readonly ITipoEventoService _tipoEventoService ;
@@ -27,70 +29,86 @@ namespace BZPAY_BE.Controllers
             _entradaService = entradaService;
         }
         // GET: Eventos
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         public async Task<IActionResult> Index()
         {
             var listaEventos= await _eventoService.GetAllEventosAsync();
-            return View(listaEventos);
+            return (listaEventos is null) ? NotFound() : Ok(listaEventos);
         }
-
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         // GET: Eventos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-            
+
             var evento = await _eventoService.GetEventoByIdAsync(id);
-            
+
             if (evento == null) return NotFound();
- 
-            return View(evento);
+
+            return (evento is null) ? NotFound() : Ok(evento);
         }
 
         // GET: Eventos/Create
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         public async Task<IActionResult> Create()
         {
             var listaTipoEventos = await _tipoEventoService.GetAllTipoEventosAsync();
             var listaEscenarios = await _escenarioService.GetAllEscenariosAsync();
-            ViewData["IdEscenario"] = new SelectList(listaEscenarios, "Id", "Nombre");
-            ViewData["IdTipoEvento"] = new SelectList(listaTipoEventos, "Id", "Descripcion");
-            return View();
+            //ViewData["IdEscenario"] = new SelectList(listaEscenarios, "Id", "Nombre");
+            //ViewData["IdTipoEvento"] = new SelectList(listaTipoEventos, "Id", "Descripcion");
+            List<Object> Lista = new();
+            Lista.Add(listaEscenarios);
+            Lista.Add(listaTipoEventos);
+            return (Lista is null) ? NotFound() : Ok(Lista);
         }
 
         // POST: Eventos/Create
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Descripcion,Fecha,CreatedAt,CreatedBy,UpdatedAt,UpdatedBy,Active,IdTipoEvento,IdEscenario")] Evento evento)
         {
             if (ModelState.IsValid)
             {
-                var result = await _eventoService.CreateEventoAsync(evento);             
+                var result = await _eventoService.CreateEventoAsync(evento);
                 return RedirectToAction(nameof(Index));
             }
             var listaTipoEventos = _tipoEventoService.GetAllTipoEventosAsync();
             var listaEscenarios = _escenarioService.GetAllEscenariosAsync();
-            ViewData["IdEscenario"] = new SelectList((System.Collections.IEnumerable)listaEscenarios, "Id", "Nombre");
-            ViewData["IdTipoEvento"] = new SelectList((System.Collections.IEnumerable)listaTipoEventos, "Id", "Descripcion");
-            return View(evento);
+            //ViewData["IdEscenario"] = new SelectList((System.Collections.IEnumerable)listaEscenarios, "Id", "Nombre");
+            //ViewData["IdTipoEvento"] = new SelectList((System.Collections.IEnumerable)listaTipoEventos, "Id", "Descripcion");
+            return (evento is null) ? NotFound() : Ok(evento);
         }
-
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         // GET: Evento/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
 
             var evento = await _eventoService.GetEventoByIdAsync(id);
-            
+
             if (evento == null) return NotFound();
 
             var listaTipoEventos = _tipoEventoService.GetAllTipoEventosAsync();
             var listaEscenarios = _escenarioService.GetAllEscenariosAsync();
-            ViewData["IdEscenario"] = new SelectList((System.Collections.IEnumerable)listaEscenarios, "Id", "Nombre",evento.IdEscenario);
-            ViewData["IdTipoEvento"] = new SelectList((System.Collections.IEnumerable)listaTipoEventos, "Id", "Descripcion",evento.IdTipoEvento);
-            return View(evento);
+            //ViewData["IdEscenario"] = new SelectList((System.Collections.IEnumerable)listaEscenarios, "Id", "Nombre",evento.IdEscenario);
+            //ViewData["IdTipoEvento"] = new SelectList((System.Collections.IEnumerable)listaTipoEventos, "Id", "Descripcion",evento.IdTipoEvento);
+            return (evento is null) ? NotFound() : Ok(evento);
         }
 
         // POST: Eventos/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,Fecha,CreatedAt,CreatedBy,UpdatedAt,UpdatedBy,Active,IdTipoEvento,IdEscenario")] Evento evento)
         {
             if (id != evento.Id) return NotFound();
@@ -103,7 +121,7 @@ namespace BZPAY_BE.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventoExists(evento.Id)) 
+                    if (!EventoExists(evento.Id))
                         return NotFound();
                     else throw;
                 }
@@ -111,25 +129,31 @@ namespace BZPAY_BE.Controllers
             }
             var listaTipoEventos = _tipoEventoService.GetAllTipoEventosAsync();
             var listaEscenarios = _escenarioService.GetAllEscenariosAsync();
-            ViewData["IdEscenario"] = new SelectList((System.Collections.IEnumerable)listaEscenarios, "Id", "Nombre", evento.IdEscenario);
-            ViewData["IdTipoEvento"] = new SelectList((System.Collections.IEnumerable)listaTipoEventos, "Id", "Descripcion", evento.IdTipoEvento);
-            return View(evento);
+            //ViewData["IdEscenario"] = new SelectList((System.Collections.IEnumerable)listaEscenarios, "Id", "Nombre", evento.IdEscenario);
+            //ViewData["IdTipoEvento"] = new SelectList((System.Collections.IEnumerable)listaTipoEventos, "Id", "Descripcion", evento.IdTipoEvento);
+            return (evento is null) ? NotFound() : Ok(evento);
         }
 
         // GET: Eventoes/Delete/5
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
 
             var evento = await _eventoService.GetEventoByIdAsync(id);
-            
+
             if (evento == null) return NotFound();
 
-            return View(evento);
+
+            return (evento is null) ? NotFound() : Ok(evento);
         }
 
         // POST: Eventoes/Delete/5
         [HttpPost, ActionName("Delete")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -150,23 +174,32 @@ namespace BZPAY_BE.Controllers
         }
 
         // GET: DetalleEventos
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(DetallesEvento), StatusCodes.Status200OK)]
         public async Task<IActionResult> DetalleEventos()
         {
             var listaEventos = await _eventoService.GetDetalleEventosAsync();
-            return View(listaEventos); 
+            return (listaEventos is null) ? NotFound() : Ok(listaEventos);
         }
 
         // GET: Eventos/Create/5
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         public async Task<IActionResult> CreateAsientos(int? id)
         {
             if (id == null) { return NotFound(); }
             var eventoAsientos = await _eventoService.GetEventoAsientosAsync(id);
             if (eventoAsientos == null || eventoAsientos.Asientos == null) { return NotFound(); }
-            return View(eventoAsientos);
+
+            return (eventoAsientos is null) ? NotFound() : Ok(eventoAsientos);
         }
 
         // POST: Eventos/Create
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateAsientos(IFormCollection collection)
         {
@@ -175,26 +208,28 @@ namespace BZPAY_BE.Controllers
                 if (ModelState.IsValid)
                 {
                     var entradaEvento = await _entradaService.CreateEntradasAsync(collection);
-                    if (entradaEvento == null)// las entradas fueron creadas
-                        TempData["Success"] = "Las Entradas fueron creadas exitosamente...";
-                    else //desplegar error --> Las entradas ya han sido creadas no se pueden volver a crear
-                        TempData["Error"] = "Error, Las entradas ya fueron creadas...";
+                    //if (entradaEvento == null)// las entradas fueron creadas
+                    //    TempData["Success"] = "Las Entradas fueron creadas exitosamente...";
+                    //else //desplegar error --> Las entradas ya han sido creadas no se pueden volver a crear
+                    //    TempData["Error"] = "Error, Las entradas ya fueron creadas...";
                 }
                 return RedirectToAction(nameof(DetalleEventos));
             }
             catch
             {
-                return View();
+                return BadRequest();
             }
         }
 
 
 
-
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
         private bool EventoExists(int id)
         {
             return _eventoService.GetEventoByIdAsync(id) == null ? true : false;
         }
-        
+
     }
 }
