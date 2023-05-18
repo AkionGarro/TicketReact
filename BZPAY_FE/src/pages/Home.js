@@ -10,6 +10,7 @@ function Home() {
   const cookies = new Cookies();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const lang = document.getElementById("language");
 
   function changeToEnglish() {
     i18n.changeLanguage("en");
@@ -19,16 +20,19 @@ function Home() {
     i18n.changeLanguage("es");
   }
 
-  function changeLan(option) {
-    if (option.toString() === "1") {
+  lang.addEventListener("change", function () {
+    const selectedValue = lang.value;
+
+    if (selectedValue === "1") {
       changeToSpanish();
     }
-    if (option.toString() === "2") {
+    if (selectedValue === "2") {
       changeToEnglish();
     } else {
       console.log("No se ha seleccionado idioma");
     }
-  }
+  });
+
   const cerrarSesion = () => {
     cookies.remove("username", { path: "/" });
     navigate("/");
@@ -75,10 +79,7 @@ function Home() {
               </button>
             </div>
             <div className="d-flex">
-              <select
-                className="languages"
-                onchange={() => changeLan($this.value)}
-              >
+              <select id="language" className="languages">
                 <option selected value="0">
                   Language
                 </option>
