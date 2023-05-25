@@ -37,25 +37,6 @@ namespace BZPAY_BE.Controllers
             var listaEventos= await _eventoService.GetAllEventosAsync();
             return (listaEventos is null) ? NotFound() : Ok(listaEventos);
         }
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
-        // GET: Eventos/Details/5
-        public async Task<IActionResult> GetEventoByIdAsync(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var evento = await _eventoService.GetEventoByIdAsync(id);
-
-            if (evento == null) return NotFound();
-
-            return (evento is null) ? NotFound() : Ok(evento);
-        }
-
-        
-
-        
-        
 
         // GET: DetalleEventos
         [HttpGet]
@@ -70,7 +51,7 @@ namespace BZPAY_BE.Controllers
         // GET: Eventos/Create/5
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(Evento), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(EventoAsiento), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetEventoAsientosAsync(int? id)
         {
             if (id == null) { return NotFound(); }

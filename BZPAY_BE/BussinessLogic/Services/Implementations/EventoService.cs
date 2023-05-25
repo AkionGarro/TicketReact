@@ -66,15 +66,15 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
             return eventoAsientos;
         }
 
-        Task<IEnumerable<DetallesEvento>> IEventoService.GetDetalleEventosAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //Task<IEnumerable<DetallesEvento>> IEventoService.GetDetalleEventosAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        Task<EventoAsiento> IEventoService.GetEventoAsientosAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
+        //Task<EventoAsiento> IEventoService.GetEventoAsientosAsync(int? id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //public async Task<Evento> GetDetallesEventosAsync()
         //{

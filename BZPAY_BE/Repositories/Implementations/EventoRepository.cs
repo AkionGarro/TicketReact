@@ -110,15 +110,15 @@ namespace BZPAY_UI.Repositories.Implementations
             return eventoAsientos;
         }
 
-        Task<IEnumerable<DetallesEvento>> IEventoRepository.GetDetalleEventosAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //Task<IEnumerable<DetallesEvento>> IEventoRepository.GetDetalleEventosAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        Task<EventoAsiento> IEventoRepository.GetEventoAsientosAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
+        //Task<EventoAsiento> IEventoRepository.GetEventoAsientosAsync(int? id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //public async Task<Evento> GetEventByIdAsync(int id)
         //{
