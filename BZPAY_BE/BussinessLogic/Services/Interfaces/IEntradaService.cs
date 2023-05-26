@@ -3,6 +3,8 @@ using BZPAY_BE.Repositories;
 using BZPAY_BE.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BZPAY_BE.DataAccess;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BZPAY_BE.BussinessLogic.Services.Interfaces
 {
@@ -16,7 +18,7 @@ namespace BZPAY_BE.BussinessLogic.Services.Interfaces
 
         Task<Entrada> GetEntradaByIdAsync(int? id);
 
-        Task<Entrada> CreateEntradasAsync(IFormCollection form);
+        Task<bool> CreateEntradasAsync([FromBody] EnterPrice price);
 
     }
 }

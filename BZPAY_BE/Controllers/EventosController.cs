@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using BZPAY_BE.BussinessLogic.Services.Interfaces;
 using BZPAY_BE.Models;
 using project_web.Models;
+using BZPAY_BE.DataAccess;
 
 namespace BZPAY_BE.Controllers
 {
@@ -64,26 +65,15 @@ namespace BZPAY_BE.Controllers
         // POST: Eventos/Create
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(DetallesEvento), StatusCodes.Status200OK)]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsientos(IFormCollection collection)
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public async Task<ActionResult<Entrada>> CreateEntradasAsync([FromBody] EnterPrice price)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var entradaEvento = await _entradaService.CreateEntradasAsync(collection);
-                    //if (entradaEvento == null)// las entradas fueron creadas
-                    //    TempData["Success"] = "Las Entradas fueron creadas exitosamente...";
-                    //else //desplegar error --> Las entradas ya han sido creadas no se pueden volver a crear
-                    //    TempData["Error"] = "Error, Las entradas ya fueron creadas...";
-                }
-                return RedirectToAction(nameof(DetallesEvento));
-            }
-            catch
-            {
-                return BadRequest();
-            }
+           
+                    var entradaEvento = await _entradaService.CreateEntradasAsync(price);
+          
+
+            return (entradaEvento is true) ? Ok(entradaEvento) : Ok(entradaEvento) ;
+
         }
 
 

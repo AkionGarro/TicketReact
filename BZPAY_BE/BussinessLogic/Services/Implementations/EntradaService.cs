@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BZPAY_BE.BussinessLogic.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace  BZPAY_BE.BussinessLogic.Services.Implementations
 {
@@ -17,11 +18,6 @@ namespace  BZPAY_BE.BussinessLogic.Services.Implementations
     public class EntradaService : IEntradaService
     {
         private readonly IEntradaRepository _entradaRepository;
-        private readonly IConfiguration _config;
-
-        public EntradaService()
-        {
-        }
 
         /// <summary>
         /// Constructor of EntradaService
@@ -29,8 +25,7 @@ namespace  BZPAY_BE.BussinessLogic.Services.Implementations
         /// <param name="entradaRepository"></param>
         public EntradaService(IEntradaRepository entradaRepository, IConfiguration config)
         {
-            _entradaRepository = entradaRepository;
-            _config = config;   
+            _entradaRepository = entradaRepository;   
         }
 
         public async Task<IEnumerable<Entrada>> GetAllEntradasAsync()
@@ -45,29 +40,37 @@ namespace  BZPAY_BE.BussinessLogic.Services.Implementations
              return lista;
         }
 
-        public async Task<Entrada> CreateEntradasAsync(IFormCollection collection)
+        public async Task<bool> CreateEntradasAsync([FromBody] EnterPrice price )
         {
-            var form = collection.ToList();
-            var idEvento = Int32.Parse(form[0].Value);
+            var idEvento = price.Id;
             //verificar primero si ya existen las entradas porque solo se pueden crear una vez
             var entradasEvento = await _entradaRepository.GetEntradaByIdEventoAsync(idEvento);
             if (entradasEvento == null)//si entradas no han sido creadas --> crearlas
             {
-                var descripciones = form[1].Value.ToList();
-                var cantidades = form[2].Value.ToList();
-                var precios = form[3].Value.ToList();
-                for (var i = 0; i < descripciones.Count(); i++)
+                //var descripciones = price.Descripcion;
+                //var cantidades = form[2].Value.ToList();
+                //var precios = form[3].Value.ToList();
+                for (var i = 0; i < price.Asientos.Count(); i++)
                 {
                     var entrada = new Entrada();
                     entrada.IdEvento = idEvento;
-                    entrada.TipoAsiento = descripciones[i];
-                    entrada.Disponibles = Int32.Parse(cantidades[i]);
-                    entrada.Precio = Decimal.Parse(precios[i]);
+                    entrada.TipoAsiento = price.Asientos[i].Descripcion;
+                    entrada.Disponibles = price.Asientos[i].Cantidad;
+                    entrada.Precio = price.Asientos[i].Precio;
+                    entrada.CreatedAt = DateTime.Now;
+                    entrada.CreatedBy = "luz";
+                    entrada.UpdatedAt = DateTime.Now;
+                    entrada.UpdatedBy = "luz";
                     entrada.Active = true;
                     await _entradaRepository.AddAsync(entrada);
                 }
+                return true;
             }
-            return entradasEvento;
+            else
+            {
+                return false;
+            }
+            
         }
 
     }
