@@ -25,6 +25,7 @@ builder.Services.AddScoped<ITipoEventoService, TipoEventoService>();
 builder.Services.AddScoped<IEventoService, EventoService>();
 builder.Services.AddScoped<IEscenarioService, EscenarioService>();
 builder.Services.AddScoped<IEntradaService, EntradaService>();
+builder.Services.AddScoped<ICompraService, CompraService>();
 
 // Add repositories
 builder.Services.AddScoped<IAspnetUserRepository, AspnetUserRepository>();
@@ -32,7 +33,7 @@ builder.Services.AddScoped<ITipoEventoRepository, TipoEventoRepository>();
 builder.Services.AddScoped<IEventoRepository, EventoRepository>();
 builder.Services.AddScoped<IEscenarioRepository, EscenarioRepository>();
 builder.Services.AddScoped<IEntradaRepository, EntradaRepository>();
-
+builder.Services.AddScoped<ICompraRepository, CompraRepository>();
 // Add services to the container.
 builder.Services.AddControllers();
 

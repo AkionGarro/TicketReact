@@ -66,9 +66,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BussinessLogic\Services\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

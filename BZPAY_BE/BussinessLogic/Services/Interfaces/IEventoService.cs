@@ -3,6 +3,7 @@ using BZPAY_BE.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using project_web.Models;
+using project_web.Models.DbModels;
 
 namespace BZPAY_BE.BussinessLogic.Services.Interfaces
 {
@@ -23,6 +24,7 @@ namespace BZPAY_BE.BussinessLogic.Services.Interfaces
         Task<IEnumerable<DetallesEvento>> GetDetalleEventosAsync();
 
         Task<EventoAsiento> GetEventoAsientosAsync(int? id);
+        Task<EventoEntrada> GetEventoEntradasAsync(int? id);
 
         //Task<Evento> GetDetallesEventosAsync();
         //Task<AspnetUserDo?> StartSessionAsync(LoginRequest login);

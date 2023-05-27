@@ -9,16 +9,6 @@ namespace BZPAY_BE.DataAccess
         [Display(Name = "Id Evento")]
         public int Id { get; set; }
 
-
-        [Display(Name = "Descripción")]
-        public string Descripcion { get; set; }
-
-        [Display(Name = "Tipo Evento")]
-        public string TipoEvento { get; set; }
-
-        [Display(Name = "Fecha")]
-        public DateTime Fecha { get; set; }
-
         [Display(Name = "Asientos")]
         public List<InfoAsiento> Asientos { get; set; }
 

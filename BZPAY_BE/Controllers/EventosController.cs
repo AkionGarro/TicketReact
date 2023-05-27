@@ -10,6 +10,7 @@ using BZPAY_BE.BussinessLogic.Services.Interfaces;
 using BZPAY_BE.Models;
 using project_web.Models;
 using BZPAY_BE.DataAccess;
+using project_web.Models.DbModels;
 
 namespace BZPAY_BE.Controllers
 {
@@ -60,6 +61,19 @@ namespace BZPAY_BE.Controllers
             if (eventoAsientos == null || eventoAsientos.Asientos == null) { return NotFound(); }
 
             return (eventoAsientos is null) ? NotFound() : Ok(eventoAsientos);
+        }
+
+        // GET: Eventos/Create/5
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(EventoEntrada), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetEventoEntradasAsync(int? id)
+        {
+            if (id == null) { return NotFound(); }
+            var eventoEntrada = await _eventoService.GetEventoEntradasAsync(id);
+            if (eventoEntrada == null || eventoEntrada.Entradas == null) { return NotFound(); }
+
+            return (eventoEntrada is null) ? NotFound() : Ok(eventoEntrada);
         }
 
         // POST: Eventos/Create

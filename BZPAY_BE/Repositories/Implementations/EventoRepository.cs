@@ -110,6 +110,53 @@ namespace BZPAY_UI.Repositories.Implementations
             return eventoAsientos;
         }
 
+        public async Task<EventoEntrada?> GetEventoEntradasAsync(int? id)
+        {
+            var evento = await _context.Eventos
+                                      .Include(esc => esc.IdEscenarioNavigation)
+                                           .ThenInclude(tesc => tesc.TipoEscenarios)
+                                      .Include(te => te.IdTipoEventoNavigation)
+                                      .Where(e => e.Active && e.Id == id)
+                                      .Select(e => new CompraCliente
+                                      {
+                                          Id = e.Id,
+                                          Descripcion = e.Descripcion,
+                                          TipoEvento = e.IdTipoEventoNavigation.Descripcion,
+                                          Fecha = e.Fecha,
+                                          TipoEscenario = e.IdEscenarioNavigation.TipoEscenarios.Select(te => te.Descripcion).FirstOrDefault(),
+                                          Escenario = e.IdEscenarioNavigation.Nombre,
+                                          Localizacion = e.IdEscenarioNavigation.Localizacion
+                                      }).FirstOrDefaultAsync();
+            if (evento == null) { return null; }
+            var entradas = await (from E in _context.Entradas
+                                  join EVE in _context.Eventos on E.IdEvento equals id
+                                  where EVE.Active && E.Active
+                                  group E by new { E.Id, E.TipoAsiento, E.Disponibles, E.Precio } into g
+                                  orderby g.Key.Id ascending
+                                  select new EntradasCantidad
+                                  {
+                                      Id = g.Key.Id,
+                                      TipoAsiento = g.Key.TipoAsiento,
+                                      Disponibles = g.Key.Disponibles,
+                                      Precio = g.Key.Precio,
+                                      Cantidad = 0
+                                  }).ToListAsync();
+            if (entradas == null) { return null; }
+            var eventoEntrada = new EventoEntrada
+            {
+                Id = evento.Id,
+                Descripcion = evento.Descripcion,
+                TipoEvento = evento.TipoEvento,
+                Fecha = evento.Fecha,
+                TipoEscenario = evento.TipoEscenario,
+                Escenario = evento.Escenario,
+                Localizacion = evento.Localizacion,
+                Entradas = entradas
+            };
+            if (eventoEntrada == null) { return null; }
+            return eventoEntrada;
+        }
+
         //Task<IEnumerable<DetallesEvento>> IEventoRepository.GetDetalleEventosAsync()
         //{
         //    throw new NotImplementedException();

@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using BZPAY_BE.BussinessLogic.Services.Interfaces;
 using project_web.Models;
+using project_web.Models.DbModels;
 
 namespace BZPAY_BE.BussinessLogic.Services.Implementations
 {
@@ -66,6 +67,11 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
             return eventoAsientos;
         }
 
+        public async Task<EventoEntrada> GetEventoEntradasAsync(int? id)
+        {
+            var eventoEntrada = await _eventoRepository.GetEventoEntradasAsync(id);
+            return eventoEntrada;
+        }
         //Task<IEnumerable<DetallesEvento>> IEventoService.GetDetalleEventosAsync()
         //{
         //    throw new NotImplementedException();

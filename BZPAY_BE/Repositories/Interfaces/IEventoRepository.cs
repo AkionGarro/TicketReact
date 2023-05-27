@@ -1,6 +1,7 @@
 ﻿using BZPAY_BE.DataAccess;
 using BZPAY_BE.Models;
 using project_web.Models;
+using project_web.Models.DbModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 namespace BZPAY_BE.Repositories.Interfaces
@@ -14,6 +15,7 @@ namespace BZPAY_BE.Repositories.Interfaces
         Task<Evento> GetEventoByIdAsync(int? id);
         Task<IEnumerable<DetallesEvento>> GetDetalleEventosAsync();
         Task<EventoAsiento> GetEventoAsientosAsync(int? id);
+        Task<EventoEntrada> GetEventoEntradasAsync(int? id);
     }
 
     
