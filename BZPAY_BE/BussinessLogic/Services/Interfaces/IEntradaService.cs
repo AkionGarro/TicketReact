@@ -18,7 +18,7 @@ namespace BZPAY_BE.BussinessLogic.Services.Interfaces
 
         Task<Entrada> GetEntradaByIdAsync(int? id);
 
-        Task<bool> CreateEntradasAsync([FromBody] EnterPrice price);
+        Task<bool> CreateEntradasAsync([FromBody] EnterPrice price, string? user);
 
     }
 }

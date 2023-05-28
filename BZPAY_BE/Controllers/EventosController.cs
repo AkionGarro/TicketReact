@@ -80,10 +80,10 @@ namespace BZPAY_BE.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
-        public async Task<ActionResult<Entrada>> CreateEntradasAsync([FromBody] EnterPrice price)
+        public async Task<ActionResult<Entrada>> CreateEntradasAsync([FromBody] EnterPrice price, string? user)
         {
            
-                    var entradaEvento = await _entradaService.CreateEntradasAsync(price);
+                    var entradaEvento = await _entradaService.CreateEntradasAsync(price, user);
           
 
             return (entradaEvento is true) ? Ok(entradaEvento) : Ok(entradaEvento) ;

@@ -40,7 +40,7 @@ namespace  BZPAY_BE.BussinessLogic.Services.Implementations
              return lista;
         }
 
-        public async Task<bool> CreateEntradasAsync([FromBody] EnterPrice price )
+        public async Task<bool> CreateEntradasAsync([FromBody] EnterPrice price , string? user)
         {
             var idEvento = price.Id;
             //verificar primero si ya existen las entradas porque solo se pueden crear una vez
@@ -58,9 +58,9 @@ namespace  BZPAY_BE.BussinessLogic.Services.Implementations
                     entrada.Disponibles = price.Asientos[i].Cantidad;
                     entrada.Precio = price.Asientos[i].Precio;
                     entrada.CreatedAt = DateTime.Now;
-                    entrada.CreatedBy = "luz";
+                    entrada.CreatedBy = user;//correo electrónico o nombre
                     entrada.UpdatedAt = DateTime.Now;
-                    entrada.UpdatedBy = "luz";
+                    entrada.UpdatedBy = user;
                     entrada.Active = true;
                     await _entradaRepository.AddAsync(entrada);
                 }
