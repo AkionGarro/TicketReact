@@ -26,8 +26,8 @@ namespace BZPAY_UI.Repositories.Implementations
         public async Task<IEnumerable<Evento>> GetAllEventosAsync()
         {
             var listaEventos = await _context.Eventos
-                                             .Include(e => e.IdEscenarioNavigation)
-                                             .Include(e => e.IdTipoEventoNavigation)
+                                             //.Include(e => e.IdEscenarioNavigation)
+                                             //.Include(e => e.IdTipoEventoNavigation)
                                              .Where(e => e.Active)
                                              .ToListAsync();
             return listaEventos;
