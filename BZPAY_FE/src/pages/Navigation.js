@@ -41,13 +41,13 @@ function Navigation() {
     navigate("/");
   };
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/Home">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <a className="navbar-brand" href="/Home">
           TectTickets
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -55,16 +55,16 @@ function Navigation() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/Entradas">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link" href="/Entradas">
                 Crear Entradas
               </a>
             </li>
-            <li class="nav-item"></li>
+            <li className="nav-item"></li>
           </ul>
         </div>
         <div className="d-flex gap-1">
@@ -75,7 +75,7 @@ function Navigation() {
           </div>
           <div className="d-flex">
             <select id="language" className="languages">
-              <option selected value="0">
+              <option defaultValue value="0">
                 Language
               </option>
               <option value="1">Spanish</option>
