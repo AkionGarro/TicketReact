@@ -4,11 +4,13 @@ import "../css/Home.css";
 import "../css/Entradas.css";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 function Entradas() {
   const [allEvents, setAllEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage] = useState(5);
+  const navigate = useNavigate();
 
   const getEvents = async () => {
     const url = "https://localhost:7052/api/Evento/GetDetalleEventos";
@@ -37,13 +39,37 @@ function Entradas() {
       throw Error(error);
     }
   };
-
-  const helloWorld = () => {
-    console.log("Hello world");
+  const sendEvent = (item) => {
+    if (item != null) {
+      navigate("/DetallesEventos", { state: { data: item } });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No se ha podido enviar el evento",
+      });
+    }
   };
 
   useEffect(() => {
     getEvents();
+
+    const sendEvent = (item) => {
+      if (item != null) {
+        Swal.fire({
+          icon: "success",
+          title: "Evento enviado",
+          text: "El evento se ha enviado correctamente",
+        });
+        navigate("/DetallesEventos", { state: { data: item } });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No se ha podido enviar el evento",
+        });
+      }
+    };
   }, []);
 
   const indexOfLastEvent = currentPage * eventsPerPage;
@@ -93,8 +119,11 @@ function Entradas() {
                     <td>{item.escenario}</td>
                     <td>{item.localizacion}</td>
                     <td>
-                      <div className="d-flex flex-column justify-content-center align-items-center ">
-                        <a onClick={helloWorld}>
+                      <div
+                        className="d-flex flex-column justify-content-center align-items-center "
+                        onClick={() => sendEvent(item)}
+                      >
+                        <a>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-eye"
