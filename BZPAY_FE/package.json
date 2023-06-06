@@ -29,6 +29,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-spinkit": "^3.0.0",
+    "sweetalert2": "^11.7.11",
     "universal-cookie": "^4.0.4",
     "utf-8": "^2.0.0",
     "utf8": "^3.0.0",

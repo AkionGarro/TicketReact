@@ -1,6 +1,6 @@
 .footerArea {
   background-color: rgb(15, 15, 16);
-  position: relative;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: auto;

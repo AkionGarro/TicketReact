@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/Home.css";
 import "../css/Entradas.css";
-import Home from "./Home";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 
 function Entradas() {
   const [allEvents, setAllEvents] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [eventsPerPage] = useState(5);
 
   const getEvents = async () => {
     const url = "https://localhost:7052/api/Evento/GetDetalleEventos";
@@ -42,10 +42,23 @@ function Entradas() {
     getEvents();
   }, []);
 
+  const indexOfLastEvent = currentPage * eventsPerPage;
+  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+  const currentEvents = allEvents.slice(indexOfFirstEvent, indexOfLastEvent);
+
+  const navigateToPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(allEvents.length / eventsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div>
       <Navigation />
-      <div>
+      <div className="eventsContainer">
         <div className="headTable">
           <h1>Eventos activos</h1>
         </div>
@@ -65,8 +78,8 @@ function Entradas() {
               </tr>
             </thead>
             <tbody>
-              {allEvents &&
-                allEvents.map((item) => (
+              {currentEvents &&
+                currentEvents.map((item) => (
                   <tr key={item.id}>
                     <th scope="row">{item.id}</th>
                     <td>{item.descripcion}</td>
@@ -103,6 +116,24 @@ function Entradas() {
             </tbody>
           </table>
         </div>
+
+        <ul className="pagination justify-content-center">
+          {pageNumbers.map((pageNumber) => (
+            <li
+              key={pageNumber}
+              className={`page-item ${
+                pageNumber === currentPage ? "active" : ""
+              }`}
+            >
+              <button
+                className="page-link"
+                onClick={() => navigateToPage(pageNumber)}
+              >
+                {pageNumber}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
       <Footer />
     </div>
