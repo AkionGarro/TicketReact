@@ -93,6 +93,11 @@
     height: 750px;
   }
 }
+@media (min-width: 1900px) {
+  .image-normal {
+    height: 40rem;
+  }
+}
 
 .header-text {
   position: absolute;

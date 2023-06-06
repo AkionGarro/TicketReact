@@ -1,10 +1,16 @@
 .footerArea {
   background-color: rgb(15, 15, 16);
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
   height: auto;
   color: white;
   font-family: Roboto;
   font-size: 20px;
+}
+
+@media (min-width: 1900px) {
+  .footerArea {
+    position: fixed;
+  }
 }

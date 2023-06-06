@@ -38,6 +38,10 @@ function Entradas() {
     }
   };
 
+  const helloWorld = () => {
+    console.log("Hello world");
+  };
+
   useEffect(() => {
     getEvents();
   }, []);
@@ -90,7 +94,7 @@ function Entradas() {
                     <td>{item.localizacion}</td>
                     <td>
                       <div className="d-flex flex-column justify-content-center align-items-center ">
-                        <a>
+                        <a onClick={helloWorld}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-eye"
