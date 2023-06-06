@@ -1,0 +1,10 @@
+.footerArea {
+  background-color: rgb(15, 15, 16);
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  color: white;
+  font-family: Roboto;
+  font-size: 20px;
+}

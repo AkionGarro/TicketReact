@@ -4,6 +4,7 @@
   font-weight: bold;
   font-size: 20px;
   width: 50%;
+
   margin: 2rem auto;
   text-align: center;
   padding: 10px;
@@ -13,5 +14,6 @@
 
 .eventsContainer {
   width: 90%;
-  margin: 0 auto;
+  height: 100%;
+  margin: 2rem auto;
 }

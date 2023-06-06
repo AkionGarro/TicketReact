@@ -5,6 +5,7 @@ import "../css/Home.css";
 import "../css/Entradas.css";
 import Home from "./Home";
 import Navigation from "./Navigation";
+import Footer from "./Footer";
 
 function Entradas() {
   const [allEvents, setAllEvents] = useState([]);
@@ -103,6 +104,7 @@ function Entradas() {
           </table>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
