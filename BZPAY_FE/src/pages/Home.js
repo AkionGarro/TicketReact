@@ -39,42 +39,42 @@ function Home() {
             <div className="carousel-inner">
               <div className="carousel-item active" data-bs-interval="3000">
                 <img
-                  src="./images/img1.jp"
+                  src="https://images.pexels.com/photos/598686/pexels-photo-598686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   className="d-block w-100"
                   alt="img1"
-                />
+                ></img>
               </div>
               <div className="carousel-item" data-bs-interval="3000">
                 <img
-                  src="./images/img2.jpg"
+                  src="https://images.pexels.com/photos/269948/pexels-photo-269948.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   className="d-block w-100"
                   alt="img2"
                 />
               </div>
               <div className="carousel-item" data-bs-interval="3000">
                 <img
-                  src="./images/img3.jpg"
+                  src="https://images.pexels.com/photos/45258/ballet-production-performance-don-quixote-45258.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   className="d-block w-100"
                   alt="img3"
                 />
               </div>
               <div className="carousel-item" data-bs-interval="3000">
                 <img
-                  src="./images/img4.jpg"
+                  src="https://images.pexels.com/photos/1884574/pexels-photo-1884574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   className="d-block w-100"
                   alt="img4"
                 />
               </div>
-              <div className="carousel-item" data-bs-interval="3000">
+              <div className="carousel-item" interval="3000">
                 <img
-                  src="./images/img5.jpg"
+                  src="https://images.pexels.com/photos/167491/pexels-photo-167491.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   className="d-block w-100"
                   alt="img5"
                 />
               </div>
               <div className="carousel-item" data-bs-interval="3000">
                 <img
-                  src="./images/img6.jpg"
+                  src="https://images.pexels.com/photos/1448385/pexels-photo-1448385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   className="d-block w-100"
                   alt="img6"
                 />
