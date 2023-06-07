@@ -40,3 +40,16 @@
 .fixB {
   width: 10rem;
 }
+
+.btn-buy {
+  width: 15%;
+  align-items: center;
+  height: 3rem;
+  background: #332d61;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}

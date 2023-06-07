@@ -110,6 +110,9 @@ function DetallesEventos() {
               ))}
           </tbody>
         </table>
+        <div>
+          <button className="btn-buy">Comprar</button>
+        </div>
       </div>
 
       <Footer />
