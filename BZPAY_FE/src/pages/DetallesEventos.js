@@ -46,35 +46,35 @@ function DetallesEventos() {
   return (
     <div>
       <Navigation />
-      <div>
+      <div className="containerEvent">
         <h2>Detalles del evento</h2>
-        <div className="">
-          <div>
+        <div className="infoEventContainer">
+          <div className="infoValue">
             <label>Descripción</label>
             <input value={currentEvent.descripcion} disabled></input>
           </div>
-          <div>
+          <div className="infoValue">
             <label>Tipo Evento</label>
             <input value={currentEvent.tipoEvento} disabled></input>
           </div>
-          <div>
+          <div className="infoValue">
             <label>Fecha</label>
             <input value={currentEvent.fecha} disabled></input>
           </div>
         </div>
 
-        <div>
-          <div>
+        <div className="infoEventContainer">
+          <div className="infoValue">
             <label>Tipo escenario</label>
             <input value={currentEvent.tipoEscenario} disabled></input>
           </div>
 
-          <div>
+          <div className="infoValue">
             <label>Escenario</label>
             <input value={currentEvent.escenario} disabled></input>
           </div>
 
-          <div>
+          <div className="infoValue">
             <label>Localización</label>
             <input value={currentEvent.localizacion} disabled></input>
           </div>

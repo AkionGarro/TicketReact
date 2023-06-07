@@ -9,5 +9,25 @@
   display: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  gap: 20px;
+}
+.infoValue {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.infoValue input {
+  text-align: center;
+  width: 100%;
+  border: solid;
+  border-radius: 2px;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  outline: none;
+  color: #000;
+  font-size: 18px;
+  min-width: 20rem;
 }
