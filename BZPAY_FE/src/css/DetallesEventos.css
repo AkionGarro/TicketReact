@@ -1,0 +1,13 @@
+.containerEvent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.infoEventContainer {
+  display: flex;
+  display: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
