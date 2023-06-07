@@ -31,3 +31,12 @@
   font-size: 18px;
   min-width: 20rem;
 }
+
+.asientosContainer {
+  width: 80vw;
+  margin: 5rem auto;
+}
+
+.fixB {
+  width: 10rem;
+}

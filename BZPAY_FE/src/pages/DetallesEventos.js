@@ -81,6 +81,37 @@ function DetallesEventos() {
         </div>
       </div>
 
+      <div className="asientosContainer">
+        <table className="table table-dark table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Id Asiento</th>
+              <th>Tipo de Asiento</th>
+              <th>Disponibles</th>
+              <th>Precio</th>
+              <th className="fixB">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {eventSeats &&
+              eventSeats.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.descripcion}</td>
+                  <td>{item.cantidad}</td>
+                  <td>{item.precio}</td>
+                  <input
+                    type="number"
+                    min={0}
+                    max={item.cantidad}
+                    className="fixB"
+                  />
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+
       <Footer />
     </div>
   );
