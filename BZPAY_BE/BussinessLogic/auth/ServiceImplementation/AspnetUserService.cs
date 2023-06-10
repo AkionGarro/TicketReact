@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using BZPAY_BE.Models;
 using Microsoft.AspNetCore.Identity;
+using BZPAY_UI.Repositories.Implementations;
 
 namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
 {
@@ -28,6 +29,12 @@ namespace BZPAY_BE.BussinessLogic.auth.ServiceImplementation
         {
             _aspnetUserRepository = aspnetUserRepository;
 
+        }
+
+        public async Task<string?> GetUserByUserIdAsync(string username)
+        {
+            var userId = await _aspnetUserRepository.GetUserByUserIdAsync(username);
+            return  userId == null ? null : userId.ToString();
         }
 
         public async Task<Aspnetuser?> StartSessionAsync(LoginRequest login)

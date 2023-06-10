@@ -16,8 +16,16 @@ namespace BZPAY_BE.Repositories.Implementations
         /// <param name="membershipContext"></param>
         public AspnetUserRepository(project_ticketContext projecticketContext) : base(projecticketContext)
         {
-        }       
-        
+        }
+
+        public async Task<String?> GetUserByUserIdAsync(string username)
+        {
+            Aspnetuser user = await _context.Aspnetusers
+                .Include(x => x.Aspnetuserlogins)
+                .SingleOrDefaultAsync(x => x.UserName == username);
+            return user.Id;
+        }
+
         public async Task<Aspnetuser?> GetUserByUserNameAsync(string username)
         {
            Aspnetuser user = await _context.Aspnetusers

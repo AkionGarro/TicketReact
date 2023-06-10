@@ -17,6 +17,17 @@ namespace BZPAY_BE.Controllers
 
         public AspnetUserController(IAspnetUserService service) => _service = service;
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(String), StatusCodes.Status200OK)]
+        //se obtine el Id del usuario mediante el correo electronico
+        public async Task<ActionResult<String>> GetUserByUserIdAsync(string? username)
+        {
+            var result = await _service.GetUserByUserIdAsync(username);
+            return (result is null) ? NotFound() : Ok(result);
+        }
+
+
         /// <summary>
         /// StartSessionAsync
         /// </summary>
@@ -31,6 +42,7 @@ namespace BZPAY_BE.Controllers
             Aspnetuser result  = await _service.StartSessionAsync(login);
             return (result is null) ? NotFound() : Ok(result);  
         }
+
 
         /// <summary>
         /// ForgotPasswordAsync

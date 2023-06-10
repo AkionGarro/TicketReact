@@ -60,9 +60,9 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
           
         }
 
-        public async Task<IEnumerable<Compra>> GetAllComprasAsync()
+        public async Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId)
         {
-            var listaCompra = await _compraRepository.GetAllComprasAsync();
+            var listaCompra = await _compraRepository.GetAllComprasAsync(userId);
             return listaCompra;
         }
     }

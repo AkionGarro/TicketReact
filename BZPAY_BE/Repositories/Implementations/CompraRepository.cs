@@ -12,9 +12,10 @@ namespace BZPAY_BE.Repositories.Implementations
         {
             
         }
-         public async Task<IEnumerable<Compra>> GetAllComprasAsync()
+         public async Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId)
         {
-           return await _context.Compras.Where(x => x.Active).ToListAsync();
+            return await _context.Compras.Where(x => x.Active && x.UserId
+            == userId).ToListAsync();
         }
     }
 }
