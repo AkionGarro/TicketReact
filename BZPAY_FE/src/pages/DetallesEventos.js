@@ -10,6 +10,7 @@ function DetallesEventos() {
   const location = useLocation();
   const currentEvent = location.state?.data;
   var idEvent = currentEvent.id;
+  var user = localStorage.getItem("user");
 
   const getSeats = async () => {
     const url =
@@ -27,6 +28,39 @@ function DetallesEventos() {
     };
 
     try {
+      const response = await fetch(url, settings);
+      const data = await response.json();
+      setAllEventSeats(data.asientos);
+      console.log(user);
+
+      if (!response.status == 200 || !response.status == 404) {
+        const message = `Un error ha ocurrido: ${response.status}`;
+        throw new Error(message);
+      }
+    } catch (error) {
+      throw Error(error);
+    }
+  };
+
+  const createTickets = async () => {
+    const url = "https://localhost:7052/api/Evento/CreateEntradas";
+    const origin = "https://localhost:3000";
+
+    const myHeaders = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": origin,
+    };
+
+    const settings = {
+      method: "get",
+      headers: myHeaders,
+    };
+
+    const tickets ={
+      idEvento: idEvent,
+      idUsuario: user,
+    }
+        try {
       const response = await fetch(url, settings);
       const data = await response.json();
       setAllEventSeats(data.asientos);
@@ -100,12 +134,14 @@ function DetallesEventos() {
                   <td>{item.descripcion}</td>
                   <td>{item.cantidad}</td>
                   <td>{item.precio}</td>
-                  <input
-                    type="number"
-                    min={0}
-                    max={item.cantidad}
-                    className="fixB"
-                  />
+                  <div>
+                    <input
+                      type="number"
+                      min={0}
+                      max={item.cantidad}
+                      className="fixB"
+                    ></input>
+                  </div>
                 </tr>
               ))}
           </tbody>
