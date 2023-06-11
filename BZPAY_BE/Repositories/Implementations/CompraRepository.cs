@@ -23,6 +23,13 @@ namespace BZPAY_BE.Repositories.Implementations
             == userId).ToListAsync();
         }
 
+        public async Task<Compra> GetCompraByIdAsync(int? id)
+        {
+            return await _context.Compras
+                                .Where(t => t.Active)
+                                .FirstOrDefaultAsync(m => m.Id == id);
+        }
+
         public async Task<byte[]> ImprimirConfirmedCompraPdfAsync(int? id)
         {
                 var compra = await _context.Compras.FindAsync(id);

@@ -8,6 +8,7 @@ namespace BZPAY_BE.Repositories.Interfaces
     public interface ICompraRepository : IGenericRepository<Compra>
     {
         Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId);
+        Task<Compra> GetCompraByIdAsync(int? id);
         Task<byte[]> ImprimirConfirmedCompraPdfAsync(int? id);
     }
 }

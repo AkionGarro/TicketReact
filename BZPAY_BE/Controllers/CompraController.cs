@@ -37,6 +37,20 @@ namespace BZPAY_BE.Controllers
             return (listaCompra is null) ? NotFound() : Ok(listaCompra);
         }
 
+
+        // GET: Compra
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Compra), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetCompraByIdAsync(int? id)
+        {
+            var listaCompra = await _compraService.GetCompraByIdAsync(id);
+            return (listaCompra is null) ? NotFound() : Ok(listaCompra);
+        }
+
+
+
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
