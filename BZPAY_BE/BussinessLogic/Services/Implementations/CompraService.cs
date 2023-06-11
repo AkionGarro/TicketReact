@@ -65,5 +65,11 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
             var listaCompra = await _compraRepository.GetAllComprasAsync(userId);
             return listaCompra;
         }
+
+        public Task<byte[]> ImprimirConfirmedCompraPdfAsync(int? id)
+        {
+            var pdfBytes = _compraRepository.ImprimirConfirmedCompraPdfAsync(id);
+            return pdfBytes;
+        }
     }
 }
