@@ -13,14 +13,18 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
     {
         private readonly ICompraRepository _compraRepository;
         private readonly IEntradaRepository _entradaRepository;
+        private readonly IAspnetUserRepository _aspnetUserRepository; 
 
-        public CompraService(ICompraRepository compraRepository, IEntradaRepository entradaRepository) {
+        public CompraService(ICompraRepository compraRepository, IEntradaRepository entradaRepository, IAspnetUserRepository aspnetUserRepository)
+        {
             _compraRepository = compraRepository;
             _entradaRepository = entradaRepository;
+            _aspnetUserRepository = aspnetUserRepository;
         }
         public async Task<bool> CreateCompraAsync([FromBody] EnterAmountTicket compra)
         {
             var estado = true;
+            var userId = await _aspnetUserRepository.GetUserByUserIdAsync(compra.User);
             bool todosMayoresACero = compra.Asientos.All(objeto => objeto.Cantidad > 0);
             if (todosMayoresACero)
             {
@@ -36,12 +40,12 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
                             Cantidad = compra.Asientos[i].Cantidad,
                             FechaReserva = DateTime.Now,
                             FechaPago = DateTime.Now,
-                            CreatedBy = "luz",
-                            UpdatedBy = "luz",
+                            CreatedBy = compra.User,
+                            UpdatedBy = compra.User,
                             UpdatedAt = DateTime.Now,
                             CreatedAt = DateTime.Now,
                             Active = true,
-                            UserId = "12df3ea5-72bb-4277-96f1-b53775869344"
+                            UserId = userId
                         };
 
                         await _compraRepository.AddAsync(comprasEntrada);

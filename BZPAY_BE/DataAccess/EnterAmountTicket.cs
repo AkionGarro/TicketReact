@@ -6,6 +6,8 @@ namespace BZPAY_BE.DataAccess
 {
     public class EnterAmountTicket
     {
+        [Display(Name = "User")]
+        public string? User { get; set; }
         [Display(Name = "Asientos")]
         public List<InfoEntrada> Asientos { get; set; }
 
