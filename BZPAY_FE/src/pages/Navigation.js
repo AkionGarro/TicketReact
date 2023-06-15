@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/Home.css";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
-import Entradas from "./Entradas";
 function Navigation() {
-  const utf8 = require("utf8");
   const cookies = new Cookies();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -64,7 +61,16 @@ function Navigation() {
                 Crear Entradas
               </a>
             </li>
-            <li className="nav-item"></li>
+            <li className="nav-item">
+              <a className="nav-link" href="/ComprarEntradas">
+                Comprar Entradas
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/Boleteria">
+                Boleteria
+              </a>
+            </li>
           </ul>
         </div>
         <div className="d-flex gap-1">

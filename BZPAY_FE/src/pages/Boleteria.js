@@ -6,7 +6,7 @@ import Footer from "./Footer";
 import { useLocation } from "react-router-dom";
 import { event } from "jquery";
 
-function DetallesEventos() {
+function Boleteria() {
   const [eventSeats, setAllEventSeats] = useState([]);
   const [precio, setPrecio] = useState(0);
   const location = useLocation();
@@ -51,7 +51,6 @@ function DetallesEventos() {
     try {
       const response = await fetch(url, settings);
       const data = await response.json();
-      console.log(data);
       setAllEventSeats(data.asientos);
       console.log(currentUser);
 
@@ -191,4 +190,4 @@ function DetallesEventos() {
   );
 }
 
-export default DetallesEventos;
+export default Boleteria;

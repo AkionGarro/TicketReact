@@ -13,9 +13,25 @@
 }
 
 .eventsContainer {
-  width: 90%;
+  width: 95%;
   height: 100%;
   margin: 2rem auto;
 }
 
+.btn-cart {
+  background-color: #1e1e1e;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  width: auto;
 
+  margin: 2rem auto;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #1e1e1e;
+}
+
+.btn-cart:hover {
+  color: rgb(240, 240, 240);
+}

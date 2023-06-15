@@ -6,26 +6,26 @@ import Footer from "./Footer";
 import { useLocation } from "react-router-dom";
 import { event } from "jquery";
 
-function DetallesEventos() {
+function ComprarEntradasDetails() {
   const [eventSeats, setAllEventSeats] = useState([]);
-  const [precio, setPrecio] = useState(0);
+  const [cantidad, setCantidad] = useState(0);
   const location = useLocation();
   const currentEvent = location.state?.data;
   var idEvent = currentEvent.id;
   var currentUser = localStorage.getItem("user");
 
-  const handleChangePrecio = (e, itemId) => {
+  const handleChangeCantidad = (e, itemId) => {
     var { value } = e.target;
 
     value = parseInt(value);
 
     var updatedEventSeats = eventSeats.map((item) => {
       if (item.id === itemId) {
-        setPrecio(value);
+        setCantidad(value);
         console.log(item);
         return {
           ...item,
-          precio: value,
+          cantidad: value,
         };
       }
       return item;
@@ -33,7 +33,7 @@ function DetallesEventos() {
     setAllEventSeats(updatedEventSeats);
   };
 
-  const getSeats = async () => {
+  const getInfo = async () => {
     const url =
       "https://localhost:7052/api/Evento/GetEventoAsientos?id=" + idEvent;
     const origin = "https://localhost:3000";
@@ -51,7 +51,6 @@ function DetallesEventos() {
     try {
       const response = await fetch(url, settings);
       const data = await response.json();
-      console.log(data);
       setAllEventSeats(data.asientos);
       console.log(currentUser);
 
@@ -64,8 +63,8 @@ function DetallesEventos() {
     }
   };
 
-  const createTickets = async () => {
-    const url = "https://localhost:7052/api/Evento/CreateEntradas";
+  const buyTickets = async () => {
+    const url = "https://localhost:7052/api/Evento/CreateCompra";
     const origin = "https://localhost:3000";
 
     const myHeaders = {
@@ -77,7 +76,7 @@ function DetallesEventos() {
     eventSeats.forEach((element) => {
       requestSeats.push({
         id: element.id,
-        cantidad: element.precio,
+        cantidad: element.cantidad,
       });
     });
     const tickets = {
@@ -106,14 +105,14 @@ function DetallesEventos() {
   };
 
   useEffect(() => {
-    getSeats();
+    getInfo();
   }, []);
 
   return (
     <div>
       <Navigation />
       <div className="containerEvent">
-        <h2>Detalles del evento</h2>
+        <h3 className="display-5">Comprar entradas</h3>
         <div className="infoEventContainer">
           <div className="infoValue">
             <label>Descripción</label>
@@ -154,7 +153,8 @@ function DetallesEventos() {
               <th>Id Asiento</th>
               <th>Tipo de Asiento</th>
               <th>Disponibles</th>
-              <th className="fixB">Precio</th>
+              <th>Precio</th>
+              <th className="fixB">Cantidad</th>
             </tr>
           </thead>
           <tbody>
@@ -165,13 +165,14 @@ function DetallesEventos() {
                     <td>{item.id}</td>
                     <td>{item.descripcion}</td>
                     <td>{item.cantidad}</td>
+                    <td>{item.precio}</td>
                     <div>
                       <input
-                        id="inputPrecio"
+                        id="inputCantidad"
                         type="number"
                         min={0}
                         className="fixB"
-                        onChange={(e) => handleChangePrecio(e, item.id)}
+                        onChange={(e) => handleChangeCantidad(e, item.id)}
                       ></input>
                     </div>
                   </tr>
@@ -180,8 +181,8 @@ function DetallesEventos() {
           </tbody>
         </table>
         <div>
-          <button className="btn-buy" onClick={createTickets}>
-            Crear
+          <button className="btn-buy" onClick={buyTickets}>
+            Comprar
           </button>
         </div>
       </div>
@@ -191,4 +192,4 @@ function DetallesEventos() {
   );
 }
 
-export default DetallesEventos;
+export default ComprarEntradasDetails;
