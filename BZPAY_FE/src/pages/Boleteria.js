@@ -13,8 +13,8 @@ function Boleteria() {
   const [eventsPerPage] = useState(5);
   const navigate = useNavigate();
   const getCarrito = async () => {
-    const userId = document.getElementById("userId").value;
-    if (userId == "") {
+    const userName = document.getElementById("userName").value;
+    if (userName == "") {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -22,7 +22,7 @@ function Boleteria() {
       });
     } else {
       const url =
-        "https://localhost:7052/api/Compra/GetAllCompras?userId=" + userId;
+        "https://localhost:7052/api/Compra/GetAllCompras?username=" + userName;
       const origin = "https://localhost:3000";
 
       const myHeaders = {
@@ -77,11 +77,11 @@ function Boleteria() {
         </div>
 
         <div className="d-flex flex-column align-items-center justify-content-center">
-          <label className="label-UserId">Digite el ID del Usuario</label>
+          <label className="label-UserId">Digite el nombre del usuario</label>
           <input
             type="text"
-            id="userId"
-            name="userId"
+            id="userName"
+            name="userName"
             className="input-userId"
           />
           <button type="button" className="btn-cart" onClick={getCarrito}>
