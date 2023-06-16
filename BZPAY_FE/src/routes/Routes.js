@@ -7,6 +7,7 @@ import DetallesEventos from "../pages/DetallesEventos";
 import Boleteria from "../pages/Boleteria";
 import ComprarEntradas from "../pages/ComprarEntradas";
 import ComprarEntradasDetails from "../pages/ComprarEntradasDetails";
+import CarritoCompras from "../pages/CarritoCompras";
 function App() {
   return (
     <Router>
@@ -17,7 +18,12 @@ function App() {
         <Route exact path="/DetallesEventos" element={<DetallesEventos />} />
         <Route exact path="/Boleteria" element={<Boleteria />} />
         <Route exact path="/ComprarEntradas" element={<ComprarEntradas />} />
-        <Route exact path="/ComprarEntradasDetails" element={<ComprarEntradasDetails />} />
+        <Route
+          exact
+          path="/ComprarEntradasDetails"
+          element={<ComprarEntradasDetails />}
+        />
+        <Route exact path="/CarritoCompras" element={<CarritoCompras />} />
       </Routes>
     </Router>
   );

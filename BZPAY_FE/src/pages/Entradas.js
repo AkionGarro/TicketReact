@@ -141,7 +141,7 @@ function Entradas() {
                             <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
                           </svg>
                         </a>
-                        <p>See details</p>
+                        <p>Ver Evento</p>
                       </div>
                     </td>
                   </tr>

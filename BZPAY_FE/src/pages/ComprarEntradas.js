@@ -12,6 +12,10 @@ function ComprarEntradas() {
   const [eventsPerPage] = useState(5);
   const navigate = useNavigate();
 
+  const goShoppingCart = () => {
+    navigate("/CarritoCompras");
+  };
+
   const getEvents = async () => {
     const url = "https://localhost:7052/api/Evento/GetDetalleEventos";
     const origin = "https://localhost:3000";
@@ -93,9 +97,9 @@ function ComprarEntradas() {
           <h2>Eventos disponibles</h2>
         </div>
 
-        <div>
+        <div className="containerView">
           <div>
-            <button className="btn-cart">
+            <button className="btn-cart" onClick={goShoppingCart}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="icon icon-tabler icon-tabler-shopping-cart"

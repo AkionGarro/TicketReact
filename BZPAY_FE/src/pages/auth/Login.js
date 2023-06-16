@@ -91,7 +91,9 @@ function Login() {
     try {
       const response = await fetch(url, settings);
       const data = await response.json();
+      console.log(data);
       localStorage.setItem("user", form.username);
+      localStorage.setItem("userId", data.id);
       console.log(localStorage.getItem("user"));
 
       if (!response.status == 200 || !response.status == 404) {
