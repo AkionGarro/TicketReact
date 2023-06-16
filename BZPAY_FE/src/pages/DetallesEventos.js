@@ -22,7 +22,6 @@ function DetallesEventos() {
     var updatedEventSeats = eventSeats.map((item) => {
       if (item.id === itemId) {
         setPrecio(value);
-        console.log(item);
         return {
           ...item,
           precio: value,
@@ -31,6 +30,7 @@ function DetallesEventos() {
       return item;
     });
     setAllEventSeats(updatedEventSeats);
+    console.log(eventSeats);
   };
 
   const getSeats = async () => {
@@ -65,7 +65,8 @@ function DetallesEventos() {
   };
 
   const createTickets = async () => {
-    const url = "https://localhost:7052/api/Evento/CreateEntradas";
+    const url =
+      "https://localhost:7052/api/Evento/CreateEntradas?user=" + currentUser;
     const origin = "https://localhost:3000";
 
     const myHeaders = {
@@ -77,11 +78,14 @@ function DetallesEventos() {
     eventSeats.forEach((element) => {
       requestSeats.push({
         id: element.id,
-        cantidad: element.precio,
+        descripcion: element.descripcion,
+        cantidad: element.cantidad,
+        precio: element.precio,
       });
     });
+
     const tickets = {
-      user: currentUser,
+      id: idEvent,
       asientos: requestSeats,
     };
 
@@ -90,9 +94,11 @@ function DetallesEventos() {
       headers: myHeaders,
       body: JSON.stringify(tickets),
     };
+    console.log("------------");
+    console.log(tickets);
+    console.log("------------");
 
     try {
-      console.log(tickets);
       const response = await fetch(url, settings);
       const data = await response.json();
       console.log(data);

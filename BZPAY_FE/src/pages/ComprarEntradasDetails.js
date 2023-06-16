@@ -18,7 +18,6 @@ function ComprarEntradasDetails() {
     var { value } = e.target;
 
     value = parseInt(value);
-
     var updatedEventSeats = eventSeats.map((item) => {
       if (item.id === itemId) {
         setCantidad(value);
@@ -35,7 +34,7 @@ function ComprarEntradasDetails() {
 
   const getInfo = async () => {
     const url =
-      "https://localhost:7052/api/Evento/GetEventoAsientos?id=" + idEvent;
+      "https://localhost:7052/api/Evento/GetEventoEntradas?id=" + idEvent;
     const origin = "https://localhost:3000";
 
     const myHeaders = {
@@ -51,8 +50,8 @@ function ComprarEntradasDetails() {
     try {
       const response = await fetch(url, settings);
       const data = await response.json();
-      setAllEventSeats(data.asientos);
-      console.log(currentUser);
+      console.log(data.entradas);
+      setAllEventSeats(data.entradas);
 
       if (!response.status == 200 || !response.status == 404) {
         const message = `Un error ha ocurrido: ${response.status}`;
