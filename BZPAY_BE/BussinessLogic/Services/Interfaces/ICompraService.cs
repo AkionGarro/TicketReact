@@ -1,6 +1,7 @@
 ﻿using BZPAY_BE.DataAccess;
 using BZPAY_BE.Models;
 using Microsoft.AspNetCore.Mvc;
+using project_web.Models.DbModels;
 
 namespace BZPAY_BE.BussinessLogic.Services.Interfaces
 {
@@ -10,6 +11,7 @@ namespace BZPAY_BE.BussinessLogic.Services.Interfaces
         Task<bool> CreateCompraAsync([FromBody] EnterAmountTicket compra);
         Task<byte[]> ImprimirConfirmedCompraPdfAsync(int? id);
         Task<Compra> GetCompraByIdAsync(int? id);
+        Task<IEnumerable<CarritoCompras>> GetCarritoComprasAsync(string? userId);
 
     }
 }

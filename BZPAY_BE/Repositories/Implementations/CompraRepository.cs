@@ -1,12 +1,10 @@
 ﻿using BZPAY_BE.Models;
-using Microsoft.EntityFrameworkCore;
 using BZPAY_BE.Repositories.Interfaces;
 using BZPAY_UI.Repositories.Implementations;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Mvc;
+using iTextSharp.text;
 using iTextSharp.text.html.simpleparser;
 using iTextSharp.text.pdf;
-using iTextSharp.text;
+using Microsoft.EntityFrameworkCore;
 using project_web.Models.DbModels;
 
 namespace BZPAY_BE.Repositories.Implementations
@@ -21,6 +19,26 @@ namespace BZPAY_BE.Repositories.Implementations
         {
             return await _context.Compras.Where(x => x.Active && x.UserId
             == userId).ToListAsync();
+        }
+
+        public async Task<IEnumerable<CarritoCompras>> GetCarritoComprasAsync(string? userId)
+        {
+            var listaCompras = (from C in _context.Compras
+                                join E in _context.Entradas on C.IdEntrada equals E.Id
+                                join EVE in _context.Eventos on E.IdEvento equals EVE.Id
+                                where C.UserId == userId && C.Active == true
+                                orderby C.Id ascending
+                                select new CarritoCompras
+                                {
+                                    Id = C.Id,
+                                    Cantidad = C.Cantidad,
+                                    Asiento = E.TipoAsiento,
+                                    Evento = EVE.Descripcion,
+                                    FechaReserva = C.FechaReserva,
+                                    IdEntrada = C.IdEntrada,
+                                    Total = (C.Cantidad * E.Precio),
+                                }).ToListAsync();
+            return await listaCompras;
         }
 
         public async Task<Compra> GetCompraByIdAsync(int? id)

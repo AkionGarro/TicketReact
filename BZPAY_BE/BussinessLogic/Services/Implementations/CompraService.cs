@@ -5,6 +5,7 @@ using BZPAY_BE.Repositories.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using project_web.Models.DbModels;
 using System.Security.Claims;
 
 namespace BZPAY_BE.BussinessLogic.Services.Implementations
@@ -67,6 +68,12 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
         public async Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId)
         {
             var listaCompra = await _compraRepository.GetAllComprasAsync(userId);
+            return listaCompra;
+        }
+
+        public async Task<IEnumerable<CarritoCompras>> GetCarritoComprasAsync(string? userId)
+        {
+            var listaCompra = await _compraRepository.GetCarritoComprasAsync(userId);
             return listaCompra;
         }
 

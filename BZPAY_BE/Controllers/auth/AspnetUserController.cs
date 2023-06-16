@@ -36,7 +36,7 @@ namespace BZPAY_BE.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Aspnetuser),StatusCodes.Status200OK)]
-
+        
         public async Task<ActionResult<Aspnetuser>> StartSessionAsync([FromBody] LoginRequest login)
         {
             Aspnetuser result  = await _service.StartSessionAsync(login);

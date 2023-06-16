@@ -6,6 +6,7 @@ using project_web.Models.DbModels;
 using BZPAY_BE.BussinessLogic.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BZPAY_BE.BussinessLogic.Services.Implementations;
+using BZPAY_BE.BussinessLogic.auth.ServiceInterface;
 
 namespace BZPAY_BE.Controllers
 {
@@ -18,9 +19,12 @@ namespace BZPAY_BE.Controllers
         private readonly ITipoEventoService _tipoEventoService;
         private readonly IEscenarioService _escenarioService;
         private readonly IEntradaService _entradaService;
+        private readonly IAspnetUserService _aspnetUserService;
 
-        public CompraController(ICompraService compraService, IEventoService eventoService, ITipoEventoService tipoEventoService, IEscenarioService escenarioService, IEntradaService entradaService)
+        public CompraController(ICompraService compraService, IEventoService eventoService, ITipoEventoService tipoEventoService, IEscenarioService escenarioService, IEntradaService entradaService,
+            IAspnetUserService aspnetUserService)
         {
+            _aspnetUserService = aspnetUserService;
             _compraService = compraService;
             _eventoService = eventoService;
             _tipoEventoService = tipoEventoService;
@@ -47,7 +51,17 @@ namespace BZPAY_BE.Controllers
             var listaCompra = await _compraService.GetCompraByIdAsync(id);
             return (listaCompra is null) ? NotFound() : Ok(listaCompra);
         }
+        //Carito de compras
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(CarritoCompras), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetCarritoComprasAsync(string? username)
+        {
 
+            var userId = await _aspnetUserService.GetUserByUserIdAsync(username);
+            var listaCompra = await _compraService.GetCarritoComprasAsync(userId);
+            return (listaCompra is null) ? NotFound() : Ok(listaCompra);
+        }
 
 
 
