@@ -94,7 +94,7 @@ function Login() {
       console.log(data);
       localStorage.setItem("user", form.username);
       localStorage.setItem("userId", data.id);
-      console.log(localStorage.getItem("user"));
+      localStorage.setItem("userRole", data.userRole);
 
       if (!response.status == 200 || !response.status == 404) {
         const message = `Un error ha ocurrido: ${response.status}`;

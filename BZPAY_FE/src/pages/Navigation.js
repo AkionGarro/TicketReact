@@ -8,7 +8,7 @@ function Navigation() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const lang = document.getElementById("language");
-
+  const userRol = localStorage.getItem("userRole");
   function changeToEnglish() {
     i18n.changeLanguage("en");
   }
@@ -56,21 +56,29 @@ function Navigation() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="/Entradas">
-                Crear Entradas
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/ComprarEntradas">
-                Comprar Entradas
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/Boleteria">
-                Boleteria
-              </a>
-            </li>
+            {userRol === "Admin" && (
+              <li className="nav-item">
+                <a className="nav-link" href="/Entradas">
+                  Crear Entradas
+                </a>
+              </li>
+            )}
+
+            {userRol === "User" && (
+              <li className="nav-item">
+                <a className="nav-link" href="/ComprarEntradas">
+                  Comprar Entradas
+                </a>
+              </li>
+            )}
+
+            {userRol === "Worker" && (
+              <li className="nav-item">
+                <a className="nav-link" href="/Boleteria">
+                  Boleteria
+                </a>
+              </li>
+            )}
           </ul>
         </div>
         <div className="d-flex gap-1">

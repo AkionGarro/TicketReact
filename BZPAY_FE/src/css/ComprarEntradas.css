@@ -57,3 +57,17 @@
   font-size: 1.2rem;
   margin-top: 1rem;
 }
+
+.btn-cart {
+  background-color: #1e1e1e;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  width: auto;
+  margin: 2rem auto;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #1e1e1e;
+  height: 3.5rem;
+}
