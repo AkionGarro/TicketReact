@@ -144,6 +144,8 @@ namespace BZPAY_BE.Models
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
 
+                entity.Property(e => e.UserRole).HasMaxLength(256);
+
                 entity.HasMany(d => d.Roles)
                     .WithMany(p => p.Users)
                     .UsingEntity<Dictionary<string, object>>(
