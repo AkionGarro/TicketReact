@@ -32,6 +32,7 @@ namespace BZPAY_BE.Models
         public virtual DbSet<Evento> Eventos { get; set; } = null!;
         public virtual DbSet<TipoEscenario> TipoEscenarios { get; set; } = null!;
         public virtual DbSet<TipoEvento> TipoEventos { get; set; } = null!;
+        public virtual DbSet<Aspnetuserrole> Aspnetuserroles { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -501,6 +502,17 @@ namespace BZPAY_BE.Models
                 entity.Property(e => e.UpdatedBy)
                     .HasMaxLength(100)
                     .HasColumnName("Updated_By");
+            });
+
+            modelBuilder.Entity<Aspnetuserrole>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                entity.ToTable("aspnetuserroles");
+
+                entity.HasIndex(e => e.RoleId, "IX_AspNetUserRoles_RoleId");
             });
 
             OnModelCreatingPartial(modelBuilder);
