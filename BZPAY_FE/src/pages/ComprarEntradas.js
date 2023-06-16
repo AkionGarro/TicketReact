@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/Home.css";
-import "../css/Entradas.css";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import "../css/ComprarEntradas.css";
 
 function ComprarEntradas() {
   const [allEvents, setAllEvents] = useState([]);
@@ -89,12 +88,12 @@ function ComprarEntradas() {
   return (
     <div>
       <Navigation />
-      <div className="eventsContainer">
+      <div className="containerEvent">
         <div className="headTable">
           <h2>Eventos disponibles</h2>
         </div>
 
-        <div className="eventsContainer">
+        <div>
           <div>
             <button className="btn-cart">
               <svg
@@ -175,7 +174,7 @@ function ComprarEntradas() {
           </table>
         </div>
 
-        <ul className="pagination justify-content-center">
+        <ul className="pagination justify-content-center ">
           {pageNumbers.map((pageNumber) => (
             <li
               key={pageNumber}

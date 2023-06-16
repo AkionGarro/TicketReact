@@ -11,6 +11,7 @@
 
 @media (min-width: 1900px) {
   .footerArea {
-    position: fixed;
+    position: absolute;
+    bottom: -5rem;
   }
 }

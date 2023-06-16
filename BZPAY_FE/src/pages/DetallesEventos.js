@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 import Footer from "./Footer";
 import { useLocation } from "react-router-dom";
 import { event } from "jquery";
+import Swal from "sweetalert2";
 
 function DetallesEventos() {
   const [eventSeats, setAllEventSeats] = useState([]);
@@ -101,6 +102,19 @@ function DetallesEventos() {
     try {
       const response = await fetch(url, settings);
       const data = await response.json();
+      if (data == false) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No se ha podido crear las entradas",
+        });
+      } else {
+        Swal.fire({
+          icon: "success",
+          title: "¡Entradas creadas!",
+          text: "Se han creado las entradas correctamente",
+        });
+      }
       console.log(data);
       if (!response.status == 200 || !response.status == 404) {
         const message = `Un error ha ocurrido: ${response.status}`;
