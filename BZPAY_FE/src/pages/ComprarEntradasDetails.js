@@ -3,25 +3,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/DetallesEventos.css";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { event } from "jquery";
+import Swal from "sweetalert2";
 
 function ComprarEntradasDetails() {
-  const [eventSeats, setAllEventSeats] = useState([]);
+  const [eventTickets, setAllEventTickets] = useState([]);
   const [cantidad, setCantidad] = useState(0);
   const location = useLocation();
   const currentEvent = location.state?.data;
   var idEvent = currentEvent.id;
   var currentUser = localStorage.getItem("user");
+  const navigate = useNavigate();
 
   const handleChangeCantidad = (e, itemId) => {
     var { value } = e.target;
 
     value = parseInt(value);
-    var updatedEventSeats = eventSeats.map((item) => {
+    var updatedEventTickets = eventTickets.map((item) => {
       if (item.id === itemId) {
         setCantidad(value);
-        console.log(item);
         return {
           ...item,
           cantidad: value,
@@ -29,7 +30,7 @@ function ComprarEntradasDetails() {
       }
       return item;
     });
-    setAllEventSeats(updatedEventSeats);
+    setAllEventTickets(updatedEventTickets);
   };
 
   const getInfo = async () => {
@@ -50,8 +51,10 @@ function ComprarEntradasDetails() {
     try {
       const response = await fetch(url, settings);
       const data = await response.json();
+      console.log("-----------------------");
       console.log(data.entradas);
-      setAllEventSeats(data.entradas);
+      console.log("-----------------------");
+      setAllEventTickets(data.entradas);
 
       if (!response.status == 200 || !response.status == 404) {
         const message = `Un error ha ocurrido: ${response.status}`;
@@ -63,7 +66,7 @@ function ComprarEntradasDetails() {
   };
 
   const buyTickets = async () => {
-    const url = "https://localhost:7052/api/Evento/CreateCompra";
+    const url = "https://localhost:7052/api/Compra/CreateCompra";
     const origin = "https://localhost:3000";
 
     const myHeaders = {
@@ -72,7 +75,7 @@ function ComprarEntradasDetails() {
     };
 
     var requestSeats = [];
-    eventSeats.forEach((element) => {
+    eventTickets.forEach((element) => {
       requestSeats.push({
         id: element.id,
         cantidad: element.cantidad,
@@ -93,7 +96,20 @@ function ComprarEntradasDetails() {
       console.log(tickets);
       const response = await fetch(url, settings);
       const data = await response.json();
-      console.log(data);
+      if (data == false) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "No se han podido comprar las entradas",
+        });
+      } else {
+        Swal.fire({
+          icon: "success",
+          title: "¡Entradas compradas!",
+          text: "Se han comprado las entradas correctamente",
+        });
+        navigate("/ComprarEntradas");
+      }
       if (!response.status == 200 || !response.status == 404) {
         const message = `Un error ha ocurrido: ${response.status}`;
         throw new Error(message);
@@ -157,13 +173,13 @@ function ComprarEntradasDetails() {
             </tr>
           </thead>
           <tbody>
-            {eventSeats &&
-              eventSeats.map((item) => {
+            {eventTickets &&
+              eventTickets.map((item) => {
                 return (
                   <tr key={item.id}>
                     <td>{item.id}</td>
-                    <td>{item.descripcion}</td>
-                    <td>{item.cantidad}</td>
+                    <td>{item.tipoAsiento}</td>
+                    <td>{item.disponibles}</td>
                     <td>{item.precio}</td>
                     <div>
                       <input
