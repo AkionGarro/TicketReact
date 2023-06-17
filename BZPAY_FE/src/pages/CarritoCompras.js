@@ -60,6 +60,43 @@ function CarritoCompras() {
     }
   }, []);
 
+  const deleteCompra = async (idCompra) => {
+    const url =
+      "https://localhost:7052/api/Compra/DeleteCompraById?IdCompra=" + idCompra;
+    const origin = "https://localhost:3000";
+
+    const myHeaders = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": origin,
+    };
+
+    const settings = {
+      method: "get",
+      headers: myHeaders,
+    };
+
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.json();
+      console.log(data);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Compra eliminada",
+        timer: 5000,
+        showConfirmButton: true,
+      }).then(() => {
+        window.location.reload();
+      });
+      if (!response.status == 200 || !response.status == 404) {
+        const message = `Un error ha ocurrido: ${response.status}`;
+        throw new Error(message);
+      }
+    } catch (error) {
+      throw Error(error);
+    }
+  };
+
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
   const currentEvents = allTickets.slice(indexOfFirstEvent, indexOfLastEvent);
@@ -107,7 +144,10 @@ function CarritoCompras() {
                     <td>{item.idEntrada}</td>
                     <td>{item.total}</td>
                     <td>
-                      <div className="d-flex flex-column justify-content-center align-items-center ">
+                      <div
+                        onClick={() => deleteCompra(item.id)}
+                        className="d-flex flex-column justify-content-center align-items-center "
+                      >
                         <a>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

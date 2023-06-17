@@ -117,10 +117,19 @@ function ComprarEntradas() {
         </div>
         <div>
           <div className="userInfo">
-            <h5>Usuario: {userInfo.username}</h5>
-            <h5>Email: {userInfo.email}</h5>
-            <h5>Rol: {userInfo.role}</h5>
-            <h5>Id: {userInfo.id}</h5>
+            <h3 className="text-center">Información de usuario</h3>
+            <h5>
+              <strong>Usuario:</strong> {userInfo.username}
+            </h5>
+            <h5>
+              <strong>Email:</strong> {userInfo.email}
+            </h5>
+            <h5>
+              <strong>Rol:</strong> {userInfo.role}
+            </h5>
+            <h5>
+              <strong>Id:</strong> {userInfo.id}
+            </h5>
           </div>
         </div>
 
