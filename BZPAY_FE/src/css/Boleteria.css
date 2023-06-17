@@ -1,6 +1,5 @@
 .btn-cart {
   width: 15%;
-
   height: 2.5rem;
   background: #332d61;
   color: #fff;
@@ -25,4 +24,7 @@
   font-size: 1.2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+.containerCheck {
+  height: 90vh;
 }

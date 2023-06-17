@@ -144,7 +144,7 @@ function Boleteria() {
   return (
     <div>
       <Navigation />
-      <div>
+      <div className="containerCheck">
         <div className="headTable">
           <h2>Procesar compras</h2>
         </div>
@@ -161,83 +161,87 @@ function Boleteria() {
             Buscar
           </button>
         </div>
-      </div>
-      {clicked && (
-        <div className="containerView">
-          <table className="table table-dark table-striped table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Asiento</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Evento</th>
-                <th scope="col">Fecha Reserva</th>
-                <th scope="col">Codigo Entrada</th>
-                <th scope="col">Total</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentTickets &&
-                currentTickets.map((item) => (
-                  <tr key={item.id}>
-                    <th scope="row">{item.id}</th>
-                    <td>{item.asiento}</td>
-                    <td>{item.cantidad}</td>
-                    <td>{item.evento}</td>
-                    <td>{item.fechaReserva}</td>
-                    <td>{item.idEntrada}</td>
-                    <td>{item.total}</td>
-                    <td>
-                      <div
-                        className="d-flex flex-column justify-content-center align-items-center "
-                        onClick={() => printTickets(item)}
-                      >
-                        <a>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-check"
-                            width="32"
-                            height="32"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#ffffff"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M5 12l5 5l10 -10" />
-                          </svg>
-                        </a>
-                        <p className="text-center">Procesar</p>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
 
-          <ul className="pagination justify-content-center ">
-            {pageNumbers.map((pageNumber) => (
-              <li
-                key={pageNumber}
-                className={`page-item ${
-                  pageNumber === currentPage ? "active" : ""
-                }`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => navigateToPage(pageNumber)}
+        {clicked && (
+          <div className="containerView">
+            <table className="table table-dark table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Asiento</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Evento</th>
+                  <th scope="col">Fecha Reserva</th>
+                  <th scope="col">Codigo Entrada</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentTickets &&
+                  currentTickets.map((item) => (
+                    <tr key={item.id}>
+                      <th scope="row">{item.id}</th>
+                      <td>{item.asiento}</td>
+                      <td>{item.cantidad}</td>
+                      <td>{item.evento}</td>
+                      <td>{item.fechaReserva}</td>
+                      <td>{item.idEntrada}</td>
+                      <td>{item.total}</td>
+                      <td>
+                        <div
+                          className="d-flex flex-column justify-content-center align-items-center "
+                          onClick={() => printTickets(item)}
+                        >
+                          <a>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-check"
+                              width="32"
+                              height="32"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#ffffff"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <path d="M5 12l5 5l10 -10" />
+                            </svg>
+                          </a>
+                          <p className="text-center">Procesar</p>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+
+            <ul className="pagination justify-content-center ">
+              {pageNumbers.map((pageNumber) => (
+                <li
+                  key={pageNumber}
+                  className={`page-item ${
+                    pageNumber === currentPage ? "active" : ""
+                  }`}
                 >
-                  {pageNumber}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
+                  <button
+                    className="page-link"
+                    onClick={() => navigateToPage(pageNumber)}
+                  >
+                    {pageNumber}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
       <Footer />
     </div>
   );
