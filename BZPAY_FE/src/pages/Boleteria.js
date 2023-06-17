@@ -51,15 +51,17 @@ function Boleteria() {
           icon: "success",
           title: "Compra procesada",
           text: "Se ha procesado la compra correctamente",
+          timer: 3000,
+        }).then(() => {
+          const pdfData = base64ToUint8Array(data);
+          const blob = new Blob([pdfData], { type: "application/pdf" });
+          const pdfURL = URL.createObjectURL(blob);
+          const downloadLink = document.createElement("a");
+          downloadLink.href = pdfURL;
+          downloadLink.download = "file.pdf";
+          downloadLink.click();
+          window.location.reload();
         });
-        const pdfData = base64ToUint8Array(data);
-        const blob = new Blob([pdfData], { type: "application/pdf" });
-        const pdfURL = URL.createObjectURL(blob);
-        const downloadLink = document.createElement("a");
-        downloadLink.href = pdfURL;
-        downloadLink.download = "file.pdf";
-        downloadLink.click();
-        navigate("/Boleteria");
       }
       if (!response.status == 200 || !response.status == 404) {
         const message = `Un error ha ocurrido: ${response.status}`;
@@ -80,7 +82,8 @@ function Boleteria() {
       });
     } else {
       const url =
-        "https://localhost:7052/api/Compra/GetAllCompras?username=" + userName;
+        "https://localhost:7052/api/Compra/GetCarritoCompras?username=" +
+        userName;
       const origin = "https://localhost:3000";
 
       const myHeaders = {
@@ -164,10 +167,13 @@ function Boleteria() {
           <table className="table table-dark table-striped table-hover">
             <thead>
               <tr>
-                <th scope="col">Id Compra</th>
+                <th scope="col">Id</th>
+                <th scope="col">Asiento</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col">Evento</th>
                 <th scope="col">Fecha Reserva</th>
                 <th scope="col">Codigo Entrada</th>
+                <th scope="col">Total</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -176,9 +182,12 @@ function Boleteria() {
                 currentTickets.map((item) => (
                   <tr key={item.id}>
                     <th scope="row">{item.id}</th>
+                    <td>{item.asiento}</td>
                     <td>{item.cantidad}</td>
+                    <td>{item.evento}</td>
                     <td>{item.fechaReserva}</td>
                     <td>{item.idEntrada}</td>
+                    <td>{item.total}</td>
                     <td>
                       <div
                         className="d-flex flex-column justify-content-center align-items-center "
