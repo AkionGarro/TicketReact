@@ -12,6 +12,13 @@ function ComprarEntradas() {
   const [eventsPerPage] = useState(5);
   const navigate = useNavigate();
 
+  const userInfo = {
+    id: localStorage.getItem("userId"),
+    username: localStorage.getItem("user"),
+    email: localStorage.getItem("userEmail"),
+    role: localStorage.getItem("userRole"),
+  };
+
   const goShoppingCart = () => {
     navigate("/CarritoCompras");
   };
@@ -106,7 +113,15 @@ function ComprarEntradas() {
       <Navigation />
       <div className="containerEvent">
         <div className="headTable">
-          <h2>Eventos disponibles</h2>
+          <h3>Eventos disponibles</h3>
+        </div>
+        <div>
+          <div className="userInfo">
+            <h5>Usuario: {userInfo.username}</h5>
+            <h5>Email: {userInfo.email}</h5>
+            <h5>Rol: {userInfo.role}</h5>
+            <h5>Id: {userInfo.id}</h5>
+          </div>
         </div>
 
         <div className="containerView">
@@ -114,15 +129,15 @@ function ComprarEntradas() {
             <button className="btn-cart" onClick={goShoppingCart}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-shopping-cart"
+                className="icon icon-tabler icon-tabler-shopping-cart"
                 width="32"
                 height="32"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="#ffffff"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />

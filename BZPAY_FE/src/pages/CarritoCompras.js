@@ -12,11 +12,12 @@ function CarritoCompras() {
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage] = useState(5);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
+  const username = localStorage.getItem("user");
 
   const getCarrito = async () => {
     const url =
-      "https://localhost:7052/api/Compra/GetAllCompras?userId=" + userId;
+      "https://localhost:7052/api/Compra/GetCarritoCompras?username=" +
+      username;
     const origin = "https://localhost:3000";
 
     const myHeaders = {
@@ -84,10 +85,13 @@ function CarritoCompras() {
           <table className="table table-dark table-striped table-hover">
             <thead>
               <tr>
-                <th scope="col">Id Compra</th>
+                <th scope="col">Id</th>
+                <th scope="col">Asiento</th>
                 <th scope="col">Cantidad</th>
+                <th scope="col">Evento</th>
                 <th scope="col">Fecha Reserva</th>
                 <th scope="col">Codigo Entrada</th>
+                <th scope="col">Total</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -96,9 +100,12 @@ function CarritoCompras() {
                 currentEvents.map((item) => (
                   <tr key={item.id}>
                     <th scope="row">{item.id}</th>
+                    <td>{item.asiento}</td>
                     <td>{item.cantidad}</td>
+                    <td>{item.evento}</td>
                     <td>{item.fechaReserva}</td>
                     <td>{item.idEntrada}</td>
+                    <td>{item.total}</td>
                     <td>
                       <div className="d-flex flex-column justify-content-center align-items-center ">
                         <a>

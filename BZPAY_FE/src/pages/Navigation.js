@@ -87,15 +87,6 @@ function Navigation() {
               {t("close_session")}
             </button>
           </div>
-          <div className="d-flex">
-            <select id="language" className="languages">
-              <option defaultValue value="0">
-                Language
-              </option>
-              <option value="1">Spanish</option>
-              <option value="2">English</option>
-            </select>
-          </div>
         </div>
       </div>
     </nav>
