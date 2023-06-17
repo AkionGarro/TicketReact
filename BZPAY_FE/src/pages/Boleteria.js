@@ -12,6 +12,37 @@ function Boleteria() {
   const [clicked, setClicked] = useState(false);
   const [eventsPerPage] = useState(5);
   const navigate = useNavigate();
+
+  const printTickets = async (item) => {
+    var id = parseInt(item.idEntrada);
+    console.log(id);
+    const url =
+      "https://localhost:7052/api/Compra/ImprimirConfirmedCompraPdf?id=" + id;
+    const origin = "https://localhost:3000";
+
+    const myHeaders = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": origin,
+    };
+
+    const settings = {
+      method: "post",
+      headers: myHeaders,
+    };
+
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.json();
+      console.log(response);
+      if (!response.status == 200 || !response.status == 404) {
+        const message = `Un error ha ocurrido: ${response.status}`;
+        throw new Error(message);
+      }
+    } catch (error) {
+      throw Error(error);
+    }
+  };
+
   const getCarrito = async () => {
     const userName = document.getElementById("userName").value;
     if (userName == "") {
@@ -57,7 +88,7 @@ function Boleteria() {
 
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  const currentEvents = allTickets.slice(indexOfFirstEvent, indexOfLastEvent);
+  const currentTickets = allTickets.slice(indexOfFirstEvent, indexOfLastEvent);
 
   const navigateToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -102,37 +133,36 @@ function Boleteria() {
               </tr>
             </thead>
             <tbody>
-              {currentEvents &&
-                currentEvents.map((item) => (
+              {currentTickets &&
+                currentTickets.map((item) => (
                   <tr key={item.id}>
                     <th scope="row">{item.id}</th>
                     <td>{item.cantidad}</td>
                     <td>{item.fechaReserva}</td>
                     <td>{item.idEntrada}</td>
                     <td>
-                      <div className="d-flex flex-column justify-content-center align-items-center ">
+                      <div
+                        className="d-flex flex-column justify-content-center align-items-center "
+                        onClick={() => printTickets(item)}
+                      >
                         <a>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-trash"
+                            className="icon icon-tabler icon-tabler-check"
                             width="32"
                             height="32"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="#ffffff"
                             fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M4 7l16 0" />
-                            <path d="M10 11l0 6" />
-                            <path d="M14 11l0 6" />
-                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                            <path d="M5 12l5 5l10 -10" />
                           </svg>
                         </a>
-                        <p className="text-center">Eliminar</p>
+                        <p className="text-center">Procesar</p>
                       </div>
                     </td>
                   </tr>
