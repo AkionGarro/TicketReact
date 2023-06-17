@@ -8,7 +8,9 @@ import Boleteria from "../pages/Boleteria";
 import ComprarEntradas from "../pages/ComprarEntradas";
 import ComprarEntradasDetails from "../pages/ComprarEntradasDetails";
 import CarritoCompras from "../pages/CarritoCompras";
+
 function App() {
+  var role = localStorage.getItem("userRole");
   return (
     <Router>
       <Routes>

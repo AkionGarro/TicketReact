@@ -120,7 +120,19 @@ function ComprarEntradasDetails() {
   };
 
   useEffect(() => {
-    getInfo();
+    if (localStorage.getItem("userRole") != "User") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "No tienes permisos para acceder a esta pagina",
+        showConfirmButton: true,
+        timer: 5000,
+      }).then(() => {
+        navigate("/");
+      });
+    } else {
+      getInfo();
+    }
   }, []);
 
   return (

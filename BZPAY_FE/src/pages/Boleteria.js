@@ -111,7 +111,19 @@ function Boleteria() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (localStorage.getItem("userRole") != "Worker") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "No tienes permisos para acceder a esta pagina",
+        timer: 5000,
+        showConfirmButton: true,
+      }).then(() => {
+        navigate("/");
+      });
+    }
+  }, []);
 
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;

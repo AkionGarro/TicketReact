@@ -4,6 +4,7 @@ import "../css/DetallesEventos.css";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { event } from "jquery";
 import Swal from "sweetalert2";
 
@@ -11,6 +12,7 @@ function DetallesEventos() {
   const [eventSeats, setAllEventSeats] = useState([]);
   const [precio, setPrecio] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
   const currentEvent = location.state?.data;
   var idEvent = currentEvent.id;
   var currentUser = localStorage.getItem("user");
@@ -126,7 +128,19 @@ function DetallesEventos() {
   };
 
   useEffect(() => {
-    getSeats();
+    if (localStorage.getItem("userRole") != "Admin") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "No tienes permisos para acceder a esta pagina",
+        showConfirmButton: true,
+        timer: 5000,
+      }).then(() => {
+        navigate("/");
+      });
+    } else {
+      getSeats();
+    }
   }, []);
 
   return (

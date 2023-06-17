@@ -50,13 +50,25 @@ function ComprarEntradas() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
+        timer: 5000,
         text: "No se ha podido enviar el evento",
       });
     }
   };
 
   useEffect(() => {
-    getEvents();
+    if (localStorage.getItem("userRole") != "User") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "No tienes permisos para acceder a esta pagina",
+        showConfirmButton: true,
+      }).then(() => {
+        navigate("/");
+      });
+    } else {
+      getEvents();
+    }
 
     const sendEvent = (item) => {
       if (item != null) {

@@ -52,7 +52,19 @@ function Entradas() {
   };
 
   useEffect(() => {
-    getEvents();
+    if (localStorage.getItem("userRole") != "Admin") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "No tienes permisos para acceder a esta pagina",
+        showConfirmButton: true,
+        timer: 5000,
+      }).then(() => {
+        navigate("/");
+      });
+    } else {
+      getEvents();
+    }
 
     const sendEvent = (item) => {
       if (item != null) {

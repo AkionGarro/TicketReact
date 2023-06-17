@@ -44,7 +44,19 @@ function CarritoCompras() {
   };
 
   useEffect(() => {
-    getCarrito();
+    if (localStorage.getItem("userRole") != "User") {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "No tienes permisos para acceder a esta pagina",
+        timer: 5000,
+        showConfirmButton: true,
+      }).then(() => {
+        navigate("/");
+      });
+    } else {
+      getCarrito();
+    }
   }, []);
 
   const indexOfLastEvent = currentPage * eventsPerPage;
