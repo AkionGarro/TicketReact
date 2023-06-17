@@ -15,7 +15,22 @@ namespace BZPAY_BE.Repositories.Implementations
         {
             
         }
-         public async Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId)
+
+        public async Task<bool> DeleteCompraByIdAsync(int? id)
+        {
+            var compra = await _context.Compras.FindAsync(id);
+            if (compra != null)
+            {
+                _context.Compras.Remove(compra);
+                await _context.SaveChangesAsync();
+                return true;
+            }else
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId)
         {
             return await _context.Compras.Where(x => x.Active && x.UserId
             == userId).ToListAsync();

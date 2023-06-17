@@ -63,7 +63,16 @@ namespace BZPAY_BE.Controllers
             var listaCompra = await _compraService.GetCarritoComprasAsync(userId);
             return (listaCompra is null) ? NotFound() : Ok(listaCompra);
         }
-
+        //eliminar compra 
+        //Carito de compras
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public async Task<IActionResult> DeleteCompraByIdAsync(int? IdCompra)
+        {
+            var deleteCompra = await _compraService.DeleteCompraByIdAsync(IdCompra);
+            return (deleteCompra is false) ? NotFound() : Ok(deleteCompra);
+        }
 
 
         [HttpPost]

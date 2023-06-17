@@ -11,6 +11,7 @@ namespace BZPAY_BE.Repositories.Interfaces
         Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId);
         Task<IEnumerable<CarritoCompras>> GetCarritoComprasAsync(string? userId);
         Task<Compra> GetCompraByIdAsync(int? id);
+        Task<bool> DeleteCompraByIdAsync(int? id);
         Task<String> ImprimirConfirmedCompraPdfAsync(int? id);
     }
 }

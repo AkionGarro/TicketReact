@@ -11,6 +11,7 @@ namespace BZPAY_BE.BussinessLogic.Services.Interfaces
         Task<bool> CreateCompraAsync([FromBody] EnterAmountTicket compra);
         Task<String> ImprimirConfirmedCompraPdfAsync(int? id);
         Task<Compra> GetCompraByIdAsync(int? id);
+        Task<bool> DeleteCompraByIdAsync(int? id);
         Task<IEnumerable<CarritoCompras>> GetCarritoComprasAsync(string? userId);
 
     }

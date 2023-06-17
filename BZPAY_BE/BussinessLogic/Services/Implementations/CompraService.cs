@@ -65,6 +65,12 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
           
         }
 
+        public async Task<bool> DeleteCompraByIdAsync(int? id)
+        {
+            var deleteCompra = await _compraRepository.DeleteCompraByIdAsync(id)
+            ; return deleteCompra;
+        }
+
         public async Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId)
         {
             var listaCompra = await _compraRepository.GetAllComprasAsync(userId);
