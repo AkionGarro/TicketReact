@@ -84,7 +84,7 @@ namespace BZPAY_BE.BussinessLogic.Services.Implementations
         }
 
 
-        public Task<byte[]> ImprimirConfirmedCompraPdfAsync(int? id)
+        public Task<String> ImprimirConfirmedCompraPdfAsync(int? id)
         {
             var pdfBytes = _compraRepository.ImprimirConfirmedCompraPdfAsync(id);
             return pdfBytes;

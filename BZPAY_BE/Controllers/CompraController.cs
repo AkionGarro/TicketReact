@@ -80,12 +80,12 @@ namespace BZPAY_BE.Controllers
         }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(FileContentResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(pdf), StatusCodes.Status200OK)]
         public async Task<ActionResult<Compra>> ImprimirConfirmedCompraPdfAsync(int? id)
         {
 
             var pdfBytes = await _compraService.ImprimirConfirmedCompraPdfAsync(id);
-            return File(pdfBytes, "application/pdf", "archivo.pdf");
+            return pdfBytes is null ? NotFound() : Ok(pdfBytes);
 
         }
     }

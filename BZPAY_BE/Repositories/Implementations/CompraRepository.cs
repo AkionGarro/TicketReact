@@ -48,7 +48,7 @@ namespace BZPAY_BE.Repositories.Implementations
                                 .FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public async Task<byte[]> ImprimirConfirmedCompraPdfAsync(int? id)
+        public async Task<String> ImprimirConfirmedCompraPdfAsync(int? id)
         {
                 var compra = await _context.Compras.FindAsync(id);
                 if (compra != null)
@@ -144,7 +144,8 @@ namespace BZPAY_BE.Repositories.Implementations
                     await _context.SaveChangesAsync();
                     // Guardar el archivo PDF en disco
                     byte[] pdfBytes = ms.ToArray();
-                    return pdfBytes;
+                    string base64String = Convert.ToBase64String(pdfBytes);
+                    return base64String;
 
             }
             else { return null; }

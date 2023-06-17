@@ -9,7 +9,7 @@ namespace BZPAY_BE.BussinessLogic.Services.Interfaces
     {
         Task<IEnumerable<Compra>> GetAllComprasAsync(string? userId);
         Task<bool> CreateCompraAsync([FromBody] EnterAmountTicket compra);
-        Task<byte[]> ImprimirConfirmedCompraPdfAsync(int? id);
+        Task<String> ImprimirConfirmedCompraPdfAsync(int? id);
         Task<Compra> GetCompraByIdAsync(int? id);
         Task<IEnumerable<CarritoCompras>> GetCarritoComprasAsync(string? userId);
 
